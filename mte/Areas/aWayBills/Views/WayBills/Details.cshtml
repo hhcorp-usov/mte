@@ -1,0 +1,66 @@
+﻿@model mte.Models.WayBills
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>WayBills</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Cars.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cars.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Enterprises.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Enterprises.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WayBillStatuses.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WayBillStatuses.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateAdd)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateAdd)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateClose)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateClose)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

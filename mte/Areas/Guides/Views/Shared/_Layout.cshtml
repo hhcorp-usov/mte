@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title – приложение ASP.NET</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/uikit")
+</head>
+
+<body>
+
+    <div class="uk-section uk-section-primary uk-section-xsmall">
+        <nav class="uk-navbar-container uk-navbar-transparent" uk-navbar>
+            <div class="uk-navbar-left">
+                @Html.ActionLink("MTE", "Index", "Home", new { area = "" }, new { @class = "uk-navbar-item uk-logo" })
+
+                @Html.Partial("Menu/TopMenu")
+            </div>
+
+            <div class="uk-navbar-right">
+                @Html.Partial("_LoginPartial")
+            </div>
+        </nav>
+    </div>
+
+    <div uk-height-viewport="expand: true">
+        <div uk-grid class="uk-child-width-expand">
+            <div class="uk-width-1-5">
+                <div class="uk-section uk-section-secondary uk-section-xsmall">
+                    <div class="uk-card uk-card-body uk-padding-small">
+                        @Html.Partial("_GuideMenuLeftLayout")
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="uk-section uk-section-default uk-section-xsmall">@RenderBody()</div>
+            </div>
+        </div>
+        
+    </div>
+
+    <div class="uk-section uk-section-secondary uk-section-xsmall">
+        <div class="uk-container uk-container-expand">&copy; @DateTime.Now.Year – приложение ASP.NET</div>
+    </div>
+
+</body>
+</html>

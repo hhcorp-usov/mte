@@ -1,0 +1,58 @@
+﻿@model mte.Models.RoutePoints
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>RoutePoints</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Points.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Points.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Routes.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Routes.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RLength)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RLength)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsBack)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsBack)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,72 @@
+﻿@model mte.Models.WayBills
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>WayBills</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Cars.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cars.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Enterprises.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Enterprises.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WayBillStatuses.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WayBillStatuses.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateAdd)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateAdd)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateClose)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateClose)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

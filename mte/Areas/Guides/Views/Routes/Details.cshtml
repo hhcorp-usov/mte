@@ -1,0 +1,74 @@
+﻿@model mte.Models.Routes
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Routes</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Enterprises.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Enterprises.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PointStart.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PointStart.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PointStop.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PointStop.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RouteTypes.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RouteTypes.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BackName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BackName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RNumber)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

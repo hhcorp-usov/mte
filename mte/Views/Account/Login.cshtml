@@ -1,0 +1,72 @@
+﻿@using mte.Models
+
+@model LoginViewModel
+
+@{
+    ViewBag.Title = "Вход в систему";
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+<div class="uk-width-1-3 uk-position-center">
+
+    <div class="uk-card uk-card-body uk-card-primary uk-card-small">
+
+        <div class="uk-card-header">
+            <div class="uk-grid-small uk-flex-middle" uk-grid>
+                <div class="uk-width-expand">
+                    <h3 class="uk-card-title uk-margin-remove-bottom">Вход в систему</h3>
+                    <p class="uk-text-meta uk-margin-remove-top"></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="uk-card-body">
+            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "uk-form-stacked", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, "", new { @class = "uk-text-emphasis" })
+
+                <div class="uk-margin">
+                    @Html.LabelFor(m => m.Email, new { @class = "uk-form-label" })
+                    <div class="uk-form-controls">
+                        @Html.TextBoxFor(m => m.Email, new { @class = "uk-input" })
+                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "uk-text-emphasis" })
+                    </div>
+                </div>
+
+                <div class="uk-margin">
+                    @Html.LabelFor(m => m.Password, new { @class = "uk-form-label" })
+                    <div class="uk-form-controls">
+                        @Html.PasswordFor(m => m.Password, new { @class = "uk-input" })
+                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "uk-text-emphasis" })
+                    </div>
+                </div>
+
+                <div class="uk-margin">
+                    <div class="uk-form-controls uk-text-right">
+                        @Html.CheckBoxFor(m => m.RememberMe, new { @class = "uk-checkbox uk-display-inline-block uk-margin-small-right" })
+                        @Html.LabelFor(m => m.RememberMe, new { @class = "uk-form-label uk-display-inline-block" })
+                    </div>
+                </div>
+
+                <div class="uk-grid-small" uk-grid>
+                    <div class="uk-width-2-5">
+                        <div><input type="submit" value="Вход" class="uk-width-expand uk-button uk-button-default" /></div>
+                    </div>
+                    <div class="uk-width-3-5">
+                        <div>@Html.ActionLink("Регистрация", "Register", new { area = "" }, new { @class = "uk-width-expand uk-button uk-button-default" })</div>
+                    </div>
+                </div>
+
+                @* Включите, когда будет включено подтверждение учетной записи для функции сброса пароля
+                    <p>
+                        @Html.ActionLink("Забыли пароль?", "ForgotPassword")
+                    </p>*@
+            }
+        </div>
+    </div>
+</div>

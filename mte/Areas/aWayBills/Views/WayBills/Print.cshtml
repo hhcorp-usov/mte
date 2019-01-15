@@ -1,0 +1,301 @@
+﻿@model mte.Models.WayBills
+@using mte.Models
+
+@{
+    MteWorkShift WorkShift = new MteWorkShift();
+    WorkShift.CurrentControler;
+    WorkShift.CurrentDisp;
+
+
+    ViewBag.Title = "Print";
+    Layout = "";
+
+    Employers Driver_1 = new Employers();
+    Employers Driver_2 = new Employers();
+    Employers Conductor_1 = new Employers();
+    Employers Conductor_2 = new Employers();
+    Employers Intern_1 = new Employers();
+    Employers Intern_2 = new Employers();
+
+    foreach (var item in Model.WayBillTeams)
+    {
+        if (item.Employers.Posts.IsDriver)
+        {
+            if (item.NumberShift == 1) { Driver_1 = item.Employers; }
+            if (item.NumberShift == 2) { Driver_2 = item.Employers; }
+        }
+        if (item.Employers.Posts.IsConductor)
+        {
+            if (item.NumberShift == 1) { Conductor_1 = item.Employers; }
+            if (item.NumberShift == 2) { Conductor_2 = item.Employers; }
+        }
+        if (item.Employers.Posts.IsIntern)
+        {
+            if (item.NumberShift == 1) { Intern_1 = item.Employers; }
+            if (item.NumberShift == 2) { Intern_2 = item.Employers; }
+        }
+    }
+}
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+
+    <link href="https://fonts.googleapis.com/css?family=Play:400,700&amp;subset=cyrillic" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Play', sans-serif;
+            color: black;
+            font-size: 9pt;
+        }
+
+        .form-col-1 {
+            width: 22%;
+            display: inline-block;
+            vertical-align: top;
+            padding-right: 8pt;
+        }
+
+        .form-col-2 {
+            width: 37%;
+            display: inline-block;
+            vertical-align: top;
+            padding-right: 8pt;
+            padding-left: 8pt;
+        }
+
+        .form-col-3 {
+            width: 37%;
+            display: inline-block;
+            vertical-align: top;
+            padding-left: 8pt;
+        }
+
+        table {
+            border-collapse: collapse;
+            border: 1px solid black; 
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid black;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <section style="margin-bottom: 1rem;">
+        <div class="form-col-1">
+            <div>
+                <div style="font-weight: bold;">@Model.Enterprises.Name</div>
+                <div style="font-size: 0.7rem;">@Model.Enterprises.YAdress</div>
+                <div>ОГРН @Model.Enterprises.Ogrn</div>
+                <div>Тел. @Model.Enterprises.Phones</div>
+            </div>
+        </div>
+        <div class="form-col-2">
+            <div style="display: block; font-size: 10pt; font-weight: bold;">
+                <div style="display: inline-block; width: 38%;">ПУТЕВОЙ ЛИСТ АВТОБУСА №</div>
+                <div style="display: inline-block; width: 25%; text-align: center; border-bottom: 1px solid black;">@Model.WNumber</div>
+                <div style="display: inline-block; width: 10%;"></div>
+                <div style="display: inline-block; width: 25%; text-align: center; border-bottom: 1px solid black;">@Model.DateAdd.ToString("dd MMMM yyyy")</div>
+            </div>
+        </div>
+        <div class="form-col-3">
+            <div style="font-size: 0.7rem; text-align: right;">
+                Типовая межотраслевая форма №6<br />
+                Утверждена постановлением Госкомстата России<br />
+                от 28.11.97 №78
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="form-col-1" style="border-right: 1px solid black;">
+            <div>
+                <div style="margin-bottom: 1rem;">
+                    Прошел предрейсовый контроль технического состояния. Автобус технически исправен. Выезд разрешен.
+                </div>
+                <div style="margin-bottom: 1rem;">
+                    Контролёр технического состояния автотранспортных средств:
+                </div>
+                <div style="margin-bottom: 1rem; font-size: 0.7rem; border-top: 1px solid black;">
+                    <div style="display: inline-block; width: 40%;">Подпись</div>
+                    <div style="display: inline-block; width: 59%;">Расшифровка</div>
+                </div>
+            </div>
+
+            <div style="margin-bottom: 1rem;">
+                Автобус, кассы, переговорное устройство в исправном состоянии, указатели установлены
+            </div>
+
+            <div>
+                <div>
+                    <div>
+                        Принял водитель
+                    </div>
+                    <div>
+                        <div style="display: inline-block; width: 40%;">&nbsp;</div>
+                        <div style="display: inline-block; width: 59%;">
+                            @Driver_1.FirstName.Trim()
+                            <span>&nbsp;</span>
+                            @Driver_1.Name.Trim().First()
+                            <span>.</span>
+                            @Driver_1.SurName.Trim().First()
+                            <span>.</span>
+                        </div>
+                    </div>
+                </div>
+                <div style="margin-bottom: 1rem; font-size: 0.7rem; border-top: 1px solid black;">
+                    <div style="display: inline-block; width: 40%;">Подпись</div>
+                    <div style="display: inline-block; width: 59%;">Расшифровка</div>
+                </div>
+            </div>
+
+            <div>
+                <div style="margin-bottom: 0.5rem;">
+                    Отметка о сдаче автобуса при смене водителя
+                </div>
+                <div>
+                    <div>
+                        Сдал:
+                    </div>
+                    <div>
+                        <div style="display: inline-block; width: 40%;">&nbsp;</div>
+                        <div style="display: inline-block; width: 59%;">
+                            @if (Driver_2.Id > 0)
+                            {
+                                @Driver_1.FirstName.Trim()
+                                <span>&nbsp;</span>
+                                @Driver_1.Name.Trim().First()
+                                <span>.</span>
+                                @Driver_1.SurName.Trim().First()
+                                <span>.</span>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div style="margin-bottom: 0.5rem; font-size: 0.7rem; border-top: 1px solid black;">
+                    <div style="display: inline-block; width: 40%;">Подпись</div>
+                    <div style="display: inline-block; width: 59%;">Расшифровка</div>
+                </div>
+                <div>
+                    <div>
+                        Принял:
+                    </div>
+                    <div>
+                        <div style="display: inline-block; width: 40%;">&nbsp;</div>
+                        <div style="display: inline-block; width: 59%;">
+                            @if (Driver_2.Id > 0)
+                            {
+                                @Driver_2.FirstName.Trim()
+                                <span>&nbsp;</span>
+                                @Driver_2.Name.Trim().First()
+                                <span>.</span>
+                                @Driver_2.SurName.Trim().First()
+                                <span>.</span>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div style="margin-bottom: 1rem; font-size: 0.7rem; border-top: 1px solid black;">
+                    <div style="display: inline-block; width: 40%;">Подпись</div>
+                    <div style="display: inline-block; width: 59%;">Расшифровка</div>
+                </div>
+            </div>
+
+            <div>
+                <div style="margin-bottom: 0.5rem;">
+                    Отметка о приеме автобуса при возвращении водителя
+                </div>
+                <div>
+                    <div>
+                        Сдал:
+                    </div>
+                    <div>
+                        <div style="display: inline-block; width: 40%;">&nbsp;</div>
+                        <div style="display: inline-block; width: 59%;">
+                            @if (Driver_2.Id > 0)
+                            {
+                                @Driver_2.FirstName.Trim()
+                                <span>&nbsp;</span>
+                                @Driver_2.Name.Trim().First()
+                                <span>.</span>
+                                @Driver_2.SurName.Trim().First()
+                                <span>.</span>
+                            }
+                            else
+                            {
+                                @Driver_1.FirstName.Trim()
+                                <span>&nbsp;</span>
+                                @Driver_1.Name.Trim().First()
+                                <span>.</span>
+                                @Driver_1.SurName.Trim().First()
+                                <span>.</span>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div style="margin-bottom: 0.5rem; font-size: 0.7rem; border-top: 1px solid black;">
+                    <div style="display: inline-block; width: 40%;">Подпись</div>
+                    <div style="display: inline-block; width: 59%;">Расшифровка</div>
+                </div>
+            </div>
+
+            <div>
+                <div style="margin-bottom: 0.5rem;">
+                    Принял: Контролёр технического состояния автотранспортных средств
+                </div>
+                <div style="margin-bottom: 1rem; font-size: 0.7rem; border-top: 1px solid black;">
+                    <div style="display: inline-block; width: 40%;">Подпись</div>
+                    <div style="display: inline-block; width: 59%;">Расшифровка</div>
+                </div>
+            </div>
+
+            <table border="0" cellspacing="0" cellpadding="3" style="margin-bottom: 1rem;">
+                <tr>
+                    <td colspan="2">Показания спидометра</td>
+                    <td width="30%">Подпись</td>
+                </tr>
+                <tr>
+                    <td width="20%">Выезд</td>
+                    <td>0</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Возврат</td>
+                    <td>0</td>
+                    <td></td>
+                </tr>
+            </table>
+
+            <div style="margin-bottom: 0.5rem;">
+                Отметка о состоянии здоровья водителя
+            </div>
+
+           
+
+            <div style="margin-bottom: 0.5rem;">
+                М.П.
+            </div>
+
+            @Model.DateAdd.ToString("dd MMMM yyyy")
+        </div>
+        <div class="form-col-2" style="border-right: 1px solid black;">
+            2
+        </div>
+        <div class="form-col-3">
+            3
+        </div>
+    </section>
+
+</body>
+</html>
