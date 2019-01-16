@@ -41,6 +41,7 @@ namespace mte.Models
         public string Name { get; set; }
         public string FirstName { get; set; }
         public string SurName { get; set; }
+        public string IIdent { get; set; }
 
         public int? EnterprisesId { get; set; }
         public int? PostsId { get; set; }
@@ -274,5 +275,18 @@ namespace mte.Models
         public virtual WayBills WayBills { get; set; }
         public virtual Routes Routes { get; set; }
         public virtual WorkTypes WorkTypes { get; set; }
+    }
+
+    public partial class Smenes
+    {
+        [Key]
+        public int Id { get; set; }
+
+        public DateTime SmenaDate { get; set; }
+        public int DispEmployersId { get; set; }
+        public int ControlerEmployersId { get; set; }
+
+        public virtual Employers DispEmployers { get; set; }
+        public virtual Employers ControlerEmployers { get; set; }
     }
 }

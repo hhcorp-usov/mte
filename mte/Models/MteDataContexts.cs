@@ -42,5 +42,8 @@
         public DbSet<WayBills> WayBills { get; set; }
         public DbSet<WayBillTeams> WayBillTeams { get; set; }
         public DbSet<WayBillFlightLists> WayBillFlightLists { get; set; }
+
+        // Smena
+        public DbSet<Smenes> Smenes { get; set; }
     }
 }

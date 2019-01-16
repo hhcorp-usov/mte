@@ -1,0 +1,42 @@
+﻿@model mte.Models.Smenes
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Smenes</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ControlerEmployers.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ControlerEmployers.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DispEmployers.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DispEmployers.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SmenaDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SmenaDate)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

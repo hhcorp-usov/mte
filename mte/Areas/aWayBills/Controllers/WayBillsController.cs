@@ -141,12 +141,13 @@ namespace mte.Areas.aWayBills.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.CurrentSmena = db.Smenes.Where(w => w.SmenaDate <= DateTime.Now).First();
             ViewBag.CarsId = new SelectList(db.Cars, "Id", "Name", wayBills.CarsId);
             ViewBag.EnterprisesId = new SelectList(db.Enterprises, "Id", "Name", wayBills.EnterprisesId);
             ViewBag.WayBillStatusesId = new SelectList(db.WayBillStatuses, "Id", "Name", wayBills.WayBillStatusesId);
 
-            
-            return new Rotativa.ViewAsPdf(wayBills) {
+            return new Rotativa.ViewAsPdf(wayBills)
+            {
                 PageMargins = new Rotativa.Options.Margins(5, 5, 5, 5),
                 PageSize = Rotativa.Options.Size.A4,
                 PageOrientation = Rotativa.Options.Orientation.Landscape

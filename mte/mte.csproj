@@ -194,6 +194,9 @@
     <Compile Include="Areas\aWayBills\Controllers\WayBillFlightListsController.cs" />
     <Compile Include="Areas\aWayBills\Controllers\WayBillTeamsController.cs" />
     <Compile Include="Areas\aWayBills\aWayBillsAreaRegistration.cs" />
+    <Compile Include="Areas\Smena\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Smena\Controllers\SmenesController.cs" />
+    <Compile Include="Areas\Smena\SmenaAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -203,7 +206,6 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\MteClasses.cs" />
     <Compile Include="Models\MteDataContexts.cs" />
     <Compile Include="Models\MteModels.cs" />
     <Compile Include="MvcSiteMapSchema.Designer.cs">
@@ -324,6 +326,15 @@
     <Content Include="MvcSiteMapSchema.xsc">
       <DependentUpon>MvcSiteMapSchema.xsd</DependentUpon>
     </Content>
+    <Content Include="Areas\Smena\Views\web.config" />
+    <Content Include="Areas\Smena\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Smena\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Smena\Views\Home\Index.cshtml" />
+    <Content Include="Areas\Smena\Views\Smenes\Create.cshtml" />
+    <Content Include="Areas\Smena\Views\Smenes\Delete.cshtml" />
+    <Content Include="Areas\Smena\Views\Smenes\Details.cshtml" />
+    <Content Include="Areas\Smena\Views\Smenes\Edit.cshtml" />
+    <Content Include="Areas\Smena\Views\Smenes\Index.cshtml" />
     <None Include="MvcSiteMapSchema.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
@@ -388,13 +399,15 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\Menu\TopMenu.cshtml" />
-    <Content Include="Views\Shared\_GuideMenuLeftLayout.cshtml" />
-    <Content Include="Views\Shared\_WayBillMenuLeftLayout.cshtml" />
+    <Content Include="Views\Shared\Menu\LeftMenu_Guide.cshtml" />
+    <Content Include="Views\Shared\Menu\LeftMenu_Waybill.cshtml" />
+    <Content Include="Views\Shared\Menu\LeftMenu_Smena.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\aWayBills\Models\" />
     <Folder Include="Areas\Guides\Models\" />
+    <Folder Include="Areas\Smena\Models\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

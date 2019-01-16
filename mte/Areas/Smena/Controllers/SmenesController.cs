@@ -9,118 +9,118 @@ using System.Web;
 using System.Web.Mvc;
 using mte.Models;
 
-namespace mte.Areas.Guides.Controllers
+namespace mte.Areas.Smena.Controllers
 {
-    public class EmployersController : Controller
+    public class SmenesController : Controller
     {
         private MteDataContexts db = new MteDataContexts();
 
-        // GET: Guides/Employers
+        // GET: Smena/Smenes
         public async Task<ActionResult> Index()
         {
-            var employers = db.Employers.Include(e => e.Enterprises).Include(e => e.Posts);
-            return View(await employers.ToListAsync());
+            var smenes = db.Smenes.Include(s => s.ControlerEmployers).Include(s => s.DispEmployers);
+            return View(await smenes.ToListAsync());
         }
 
-        // GET: Guides/Employers/Details/5
+        // GET: Smena/Smenes/Details/5
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Employers employers = await db.Employers.FindAsync(id);
-            if (employers == null)
+            Smenes smenes = await db.Smenes.FindAsync(id);
+            if (smenes == null)
             {
                 return HttpNotFound();
             }
-            return View(employers);
+            return View(smenes);
         }
 
-        // GET: Guides/Employers/Create
+        // GET: Smena/Smenes/Create
         public ActionResult Create()
         {
-            ViewBag.EnterprisesId = new SelectList(db.Enterprises, "Id", "Name");
-            ViewBag.PostsId = new SelectList(db.Posts, "Id", "Name");
+            ViewBag.ControlerEmployersId = new SelectList(db.Employers.Where(p => p.Posts.IsControler == true).OrderBy(o => o.FirstName), "Id", "Name");
+            ViewBag.DispEmployersId = new SelectList(db.Employers.Where(p => p.Posts.IsDisp == true).OrderBy(o => o.FirstName), "Id", "Name");
             return View();
         }
 
-        // POST: Guides/Employers/Create
+        // POST: Smena/Smenes/Create
         // Чтобы защититься от атак чрезмерной передачи данных, включите определенные свойства, для которых следует установить привязку. Дополнительные 
         // сведения см. в статье https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,Name,FirstName,SurName,IIdent,EnterprisesId,PostsId")] Employers employers)
+        public async Task<ActionResult> Create([Bind(Include = "Id,SmenaDate,DispEmployersId,ControlerEmployersId")] Smenes smenes)
         {
             if (ModelState.IsValid)
             {
-                db.Employers.Add(employers);
+                db.Smenes.Add(smenes);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.EnterprisesId = new SelectList(db.Enterprises, "Id", "Name", employers.EnterprisesId);
-            ViewBag.PostsId = new SelectList(db.Posts, "Id", "Name", employers.PostsId);
-            return View(employers);
+            ViewBag.ControlerEmployersId = new SelectList(db.Employers, "Id", "Name", smenes.ControlerEmployersId);
+            ViewBag.DispEmployersId = new SelectList(db.Employers, "Id", "Name", smenes.DispEmployersId);
+            return View(smenes);
         }
 
-        // GET: Guides/Employers/Edit/5
+        // GET: Smena/Smenes/Edit/5
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Employers employers = await db.Employers.FindAsync(id);
-            if (employers == null)
+            Smenes smenes = await db.Smenes.FindAsync(id);
+            if (smenes == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.EnterprisesId = new SelectList(db.Enterprises, "Id", "Name", employers.EnterprisesId);
-            ViewBag.PostsId = new SelectList(db.Posts, "Id", "Name", employers.PostsId);
-            return View(employers);
+            ViewBag.ControlerEmployersId = new SelectList(db.Employers, "Id", "Name", smenes.ControlerEmployersId);
+            ViewBag.DispEmployersId = new SelectList(db.Employers, "Id", "Name", smenes.DispEmployersId);
+            return View(smenes);
         }
 
-        // POST: Guides/Employers/Edit/5
+        // POST: Smena/Smenes/Edit/5
         // Чтобы защититься от атак чрезмерной передачи данных, включите определенные свойства, для которых следует установить привязку. Дополнительные 
         // сведения см. в статье https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,Name,FirstName,SurName,IIdent,EnterprisesId,PostsId")] Employers employers)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,SmenaDate,DispEmployersId,ControlerEmployersId")] Smenes smenes)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(employers).State = EntityState.Modified;
+                db.Entry(smenes).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            ViewBag.EnterprisesId = new SelectList(db.Enterprises, "Id", "Name", employers.EnterprisesId);
-            ViewBag.PostsId = new SelectList(db.Posts, "Id", "Name", employers.PostsId);
-            return View(employers);
+            ViewBag.ControlerEmployersId = new SelectList(db.Employers, "Id", "Name", smenes.ControlerEmployersId);
+            ViewBag.DispEmployersId = new SelectList(db.Employers, "Id", "Name", smenes.DispEmployersId);
+            return View(smenes);
         }
 
-        // GET: Guides/Employers/Delete/5
+        // GET: Smena/Smenes/Delete/5
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Employers employers = await db.Employers.FindAsync(id);
-            if (employers == null)
+            Smenes smenes = await db.Smenes.FindAsync(id);
+            if (smenes == null)
             {
                 return HttpNotFound();
             }
-            return View(employers);
+            return View(smenes);
         }
 
-        // POST: Guides/Employers/Delete/5
+        // POST: Smena/Smenes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            Employers employers = await db.Employers.FindAsync(id);
-            db.Employers.Remove(employers);
+            Smenes smenes = await db.Smenes.FindAsync(id);
+            db.Smenes.Remove(smenes);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }

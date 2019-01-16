@@ -2,11 +2,6 @@
 @using mte.Models
 
 @{
-    MteWorkShift WorkShift = new MteWorkShift();
-    WorkShift.CurrentControler;
-    WorkShift.CurrentDisp;
-
-
     ViewBag.Title = "Print";
     Layout = "";
 
@@ -35,6 +30,9 @@
             if (item.NumberShift == 2) { Intern_2 = item.Employers; }
         }
     }
+
+    Employers Contoler = ViewBag.CurrentSmena.ControlerEmployers;
+    Employers Dispetcher = ViewBag.CurrentSmena.DispEmployers;
 }
 
 <!DOCTYPE html>
@@ -78,14 +76,13 @@
 
         table {
             border-collapse: collapse;
-            border: 1px solid black; 
+            border: 1px solid black;
             width: 100%;
         }
 
         th, td {
             border: 1px solid black;
         }
-
     </style>
 
 </head>
@@ -122,12 +119,26 @@
         <div class="form-col-1" style="border-right: 1px solid black;">
             <div>
                 <div style="margin-bottom: 1rem;">
-                    Прошел предрейсовый контроль технического состояния. Автобус технически исправен. Выезд разрешен.
+                    Прошел предрейсовый контроль технического состояния транспортного средства. Автобус технически исправен. Выезд разрешен.
                 </div>
-                <div style="margin-bottom: 1rem;">
-                    Контролёр технического состояния автотранспортных средств:
+
+                <div>
+                    <div>
+                        Контролёр технического состояния автотранспортных средств:
+                    </div>
+                    <div>
+                        <div style="display: inline-block; width: 40%;">&nbsp;</div>
+                        <div style="display: inline-block; width: 59%;">
+                            @Contoler.FirstName.Trim()
+                            <span>&nbsp;</span>
+                            @Contoler.Name.Trim().First()
+                            <span>.</span>
+                            @Contoler.SurName.Trim().First()
+                            <span>.</span>
+                        </div>
+                    </div>
                 </div>
-                <div style="margin-bottom: 1rem; font-size: 0.7rem; border-top: 1px solid black;">
+                <div style="margin-bottom: 1rem; font-size: 0.6rem; border-top: 1px solid black;">
                     <div style="display: inline-block; width: 40%;">Подпись</div>
                     <div style="display: inline-block; width: 59%;">Расшифровка</div>
                 </div>
@@ -154,7 +165,7 @@
                         </div>
                     </div>
                 </div>
-                <div style="margin-bottom: 1rem; font-size: 0.7rem; border-top: 1px solid black;">
+                <div style="margin-bottom: 1rem; font-size: 0.6rem; border-top: 1px solid black;">
                     <div style="display: inline-block; width: 40%;">Подпись</div>
                     <div style="display: inline-block; width: 59%;">Расшифровка</div>
                 </div>
@@ -183,7 +194,7 @@
                         </div>
                     </div>
                 </div>
-                <div style="margin-bottom: 0.5rem; font-size: 0.7rem; border-top: 1px solid black;">
+                <div style="margin-bottom: 0.5rem; font-size: 0.6rem; border-top: 1px solid black;">
                     <div style="display: inline-block; width: 40%;">Подпись</div>
                     <div style="display: inline-block; width: 59%;">Расшифровка</div>
                 </div>
@@ -206,7 +217,7 @@
                         </div>
                     </div>
                 </div>
-                <div style="margin-bottom: 1rem; font-size: 0.7rem; border-top: 1px solid black;">
+                <div style="margin-bottom: 1rem; font-size: 0.6rem; border-top: 1px solid black;">
                     <div style="display: inline-block; width: 40%;">Подпись</div>
                     <div style="display: inline-block; width: 59%;">Расшифровка</div>
                 </div>
@@ -244,17 +255,30 @@
                         </div>
                     </div>
                 </div>
-                <div style="margin-bottom: 0.5rem; font-size: 0.7rem; border-top: 1px solid black;">
+                <div style="margin-bottom: 0.5rem; font-size: 0.6rem; border-top: 1px solid black;">
                     <div style="display: inline-block; width: 40%;">Подпись</div>
                     <div style="display: inline-block; width: 59%;">Расшифровка</div>
                 </div>
             </div>
 
             <div>
-                <div style="margin-bottom: 0.5rem;">
-                    Принял: Контролёр технического состояния автотранспортных средств
+                <div>
+                    <div>
+                        Принял: Контролёр технического состояния автотранспортных средств
+                    </div>
+                    <div>
+                        <div style="display: inline-block; width: 40%;">&nbsp;</div>
+                        <div style="display: inline-block; width: 59%;">
+                            @Contoler.FirstName.Trim()
+                            <span>&nbsp;</span>
+                            @Contoler.Name.Trim().First()
+                            <span>.</span>
+                            @Contoler.SurName.Trim().First()
+                            <span>.</span>
+                        </div>
+                    </div>
                 </div>
-                <div style="margin-bottom: 1rem; font-size: 0.7rem; border-top: 1px solid black;">
+                <div style="margin-bottom: 1rem; font-size: 0.6rem; border-top: 1px solid black;">
                     <div style="display: inline-block; width: 40%;">Подпись</div>
                     <div style="display: inline-block; width: 59%;">Расшифровка</div>
                 </div>
@@ -281,8 +305,6 @@
                 Отметка о состоянии здоровья водителя
             </div>
 
-           
-
             <div style="margin-bottom: 0.5rem;">
                 М.П.
             </div>
@@ -290,7 +312,73 @@
             @Model.DateAdd.ToString("dd MMMM yyyy")
         </div>
         <div class="form-col-2" style="border-right: 1px solid black;">
-            2
+
+            <div style="margin-bottom: 0.5rem;">
+                <div style="display: inline-block; width: 20%;">Марка автобуса</div>
+                <div style="display: inline-block; width: 79%; border-bottom: 1px solid black;">
+                    @Model.Cars.CarBrands.Name.Trim()
+                </div>
+            </div>
+            <div style="margin-bottom: 1rem;">
+                <div style="display: inline-block; width: 20%;">Гос. номер</div>
+                <div style="display: inline-block; width: 25%; border-bottom: 1px solid black;">
+                    @Model.Cars.PIdent
+                </div>
+                <div style="display: inline-block; width: 28%;">Гаражный номер</div>
+                <div style="display: inline-block; width: 25%; border-bottom: 1px solid black;">
+                    @Model.Cars.BIdent
+                </div>
+            </div>
+
+            <table border="0" cellspacing="0" cellpadding="3" style="margin-bottom: 1rem;">
+                <tr>
+                    <td rowspan="2">Фамилия, Имя, Отчество</td>
+                    <td rowspan="2">Табельный номер</td>
+                    <td colspan="2">Номер</td>
+                </tr>
+                <tr>
+                    <td>Удостоверения</td>
+                    <td>Билетно-учетного листа</td>
+                </tr>
+                @foreach (var item in Model.WayBillTeams)
+                {
+                    if (item.Employers.Posts.IsDriver || item.Employers.Posts.IsConductor)
+                    {
+                        <tr>
+                            <td width="50%">
+                                @item.Employers.FirstName.Trim()
+                                <span>&nbsp;</span>
+                                @item.Employers.Name.Trim()
+                                <span>&nbsp;</span>
+                                @item.Employers.SurName.Trim()
+                            </td>
+                            <td>
+                                @item.Employers.IIdent
+                            </td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    }
+                }
+            </table>
+
+            <div style="margin-bottom: 0.5rem;">
+                <div style="display: inline-block; width: 99%; border-bottom: 1px solid black;">
+                    @{ var Routes = Model.WayBillFlightLists.GroupBy(g => g.Routes).ToList();
+                        foreach (var item in Routes)
+                        {
+                            <div>@item.Key.Name</div>
+                        }
+                    }
+                </div>
+            </div>
+
+            <div style="margin-bottom: 0.5rem;">
+                <div style="display: inline-block; width: 99%; border-bottom: 1px solid black;">
+                    Место подачи @Model.WayBillFlightLists.OrderBy(o=>o.Id).First().Routes.PointStart.Name
+                </div>
+            </div>
+
         </div>
         <div class="form-col-3">
             3
