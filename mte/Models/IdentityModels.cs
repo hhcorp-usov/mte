@@ -14,6 +14,9 @@ namespace mte.Models
         public string FirstName { get; set; }
         public string Name { get; set; }
         public string SurName { get; set; }
+
+        public int GlobalContainersId { get; set; }
+        public virtual GlobalContainers GlobalContainers { get; set; }
     }
 
     // В профиль пользователя можно добавить дополнительные данные, если указать больше свойств для класса ApplicationUser. Подробности см. на странице https://go.microsoft.com/fwlink/?LinkID=317594.

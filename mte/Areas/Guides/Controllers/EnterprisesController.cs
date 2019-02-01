@@ -5,7 +5,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Net;
-using System.Web;
+using Microsoft.AspNet.Identity;
 using System.Web.Mvc;
 using mte.Models;
 
@@ -14,11 +14,14 @@ namespace mte.Areas.Guides.Controllers
     public class EnterprisesController : Controller
     {
         private MteDataContexts db = new MteDataContexts();
+        private ApplicationDbContext dbu = new ApplicationDbContext();
 
         // GET: Guides/Enterprises
         public async Task<ActionResult> Index()
         {
-            return View(await db.Enterprises.ToListAsync());
+            var currentUserId = User.Identity.GetUserId();
+            ApplicationUser u = dbu.Users.FirstOrDefault(x => x.Id == currentUserId);
+            return View(await db.Enterprises.Where(w => w.GlobalContainersId == u.AdditionalUserInfo.GlobalContainersId).ToListAsync());
         }
 
         // GET: Guides/Enterprises/Details/5

@@ -90,6 +90,10 @@ namespace mte.Models
         public string Name { get; set; }
         [Display(Name = "Отчество")]
         public string SurName { get; set; }
+
+        [Required]
+        [Display(Name = "Наименование контейнера")]
+        public string ContainerName { get; set; }
     }
 
     public class ResetPasswordViewModel

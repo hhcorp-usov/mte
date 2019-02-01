@@ -6,10 +6,19 @@ using System.Web;
 
 namespace mte.Models
 {
+    public partial class GlobalContainers
+    {
+        [Key]
+        public int Id { get; set; }
+
+        public string Name { get; set; }
+    }
+
     public partial class Enterprises
     {
         [Key]
         public int Id { get; set; }
+        public int GlobalContainersId { get; set; }
 
         public string Name { get; set; }
         public string Inn { get; set; }
@@ -24,6 +33,7 @@ namespace mte.Models
     {
         [Key]
         public int Id { get; set; }
+        public int GlobalContainersId { get; set; }
 
         public string Name { get; set; }
         public bool IsDriver { get; set; }
@@ -37,6 +47,7 @@ namespace mte.Models
     {
         [Key]
         public int Id { get; set; }
+        public int GlobalContainersId { get; set; }
 
         public string Name { get; set; }
         public string FirstName { get; set; }
@@ -54,6 +65,7 @@ namespace mte.Models
     {
         [Key]
         public int Id { get; set; }
+        public int GlobalContainersId { get; set; }
 
         public string Name { get; set; }
     }
@@ -62,6 +74,7 @@ namespace mte.Models
     {
         [Key]
         public int Id { get; set; }
+        public int GlobalContainersId { get; set; }
 
         public string Name { get; set; }
     }
@@ -70,6 +83,7 @@ namespace mte.Models
     {
         [Key]
         public int Id { get; set; }
+        public int GlobalContainersId { get; set; }
 
         public string Name { get; set; }
         public string PIdent { get; set; }
@@ -88,6 +102,7 @@ namespace mte.Models
     {
         [Key]
         public int Id { get; set; }
+        public int GlobalContainersId { get; set; }
 
         public string Name { get; set; }
         public string ShortName { get; set; }
@@ -97,6 +112,7 @@ namespace mte.Models
     {
         [Key]
         public int Id { get; set; }
+        public int GlobalContainersId { get; set; }
 
         public string Name { get; set; }
         public int PointTypesId { get; set; }
@@ -108,6 +124,7 @@ namespace mte.Models
     {
         [Key]
         public int Id { get; set; }
+        public int GlobalContainersId { get; set; }
 
         public string Name { get; set; }
     }
@@ -116,6 +133,7 @@ namespace mte.Models
     {
         [Key]
         public int Id { get; set; }
+        public int GlobalContainersId { get; set; }
 
         public string Name { get; set; }
         public string BackName { get; set; }
@@ -143,6 +161,8 @@ namespace mte.Models
     {
         [Key]
         public int Id { get; set; }
+        public int GlobalContainersId { get; set; }
+
         public int RoutesId { get; set; }
         public int PointsId { get; set; }
 
@@ -158,6 +178,7 @@ namespace mte.Models
     {
         [Key]
         public int Id { get; set; }
+        public int GlobalContainersId { get; set; }
 
         public string Name { get; set; }
         public bool IsNullRun { get; set; }
@@ -170,6 +191,7 @@ namespace mte.Models
     {
         [Key]
         public int Id { get; set; }
+        public int GlobalContainersId { get; set; }
 
         public string Name { get; set; }
         public DateTime DateBegin { get; set; }
@@ -192,6 +214,8 @@ namespace mte.Models
     {
         [Key]
         public int Id { get; set; }
+        public int GlobalContainersId { get; set; }
+
         public int BoardsId { get; set; }
 
         public int NumberShift { get; set; }
@@ -211,6 +235,7 @@ namespace mte.Models
     {
         [Key]
         public int Id { get; set; }
+        public int GlobalContainersId { get; set; }
 
         public string Name { get; set; }
         public int Step { get; set; }
@@ -220,6 +245,7 @@ namespace mte.Models
     {
         [Key]
         public int Id { get; set; }
+        public int GlobalContainersId { get; set; }
 
         public string WNumber { get; set; }
         public DateTime DateAdd { get; set; }
@@ -247,6 +273,7 @@ namespace mte.Models
     {
         [Key]
         public int Id { get; set; }
+        public int GlobalContainersId { get; set; }
 
         public int WayBillsId { get; set; }
         public int EmployersId { get; set; }
@@ -261,6 +288,7 @@ namespace mte.Models
     {
         [Key]
         public int Id { get; set; }
+        public int GlobalContainersId { get; set; }
 
         public int WayBillsId { get; set; }
 
@@ -281,6 +309,7 @@ namespace mte.Models
     {
         [Key]
         public int Id { get; set; }
+        public int GlobalContainersId { get; set; }
 
         public DateTime SmenaDate { get; set; }
         public int DispEmployersId { get; set; }

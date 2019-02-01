@@ -161,8 +161,11 @@ namespace mte.Controllers
                     {
                         FirstName = model.FirstName.Trim(),
                         Name = model.Name.Trim(),
-                        SurName = model.SurName.Trim()
-                    }
+                        SurName = model.SurName.Trim(),
+                        GlobalContainers = new GlobalContainers {
+                            Name = model.ContainerName
+                        }
+                    }                    
                 };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
