@@ -373,15 +373,293 @@
                 </div>
             </div>
 
-            <div style="margin-bottom: 0.5rem;">
+            <div style="margin-bottom: 1rem;">
                 <div style="display: inline-block; width: 99%; border-bottom: 1px solid black;">
-                    Место подачи @Model.WayBillFlightLists.OrderBy(o=>o.Id).First().Routes.PointStart.Name
+                    Место подачи @Model.WayBillFlightLists.OrderBy(o => o.Id).First().Routes.PointStart.Name
                 </div>
             </div>
 
+            <div style="margin-bottom: 1rem; width: 100%;">
+                <div style="display: inline-block; width: 50%;">
+                    <div style="margin-bottom: 0.5rem;">
+                        <div style="display: inline-block; width: 20%;">Заказчик:</div>
+                        <div style="display: inline-block; width: 79%; border-bottom: 1px solid black;"></div>
+                    </div>
+                    <div>
+                        <div style="display: inline-block; width: 25%; border-bottom: 1px solid black;"></div>
+                        <div style="display: inline-block; width: 10%;">ч</div>
+                        <div style="display: inline-block; width: 25%; border-bottom: 1px solid black;"></div>
+                        <div style="display: inline-block; width: 10%;">мин</div>
+                    </div>
+                    <div style="margin-bottom: 0.5rem;">
+                        <div style="display: inline-block; width: 20%;">Заказчик:</div>
+                        <div style="display: inline-block; width: 79%; border-bottom: 1px solid black;"></div>
+                    </div>
+                    <div>
+                        <div style="display: inline-block; width: 25%; border-bottom: 1px solid black;"></div>
+                        <div style="display: inline-block; width: 10%;">ч</div>
+                        <div style="display: inline-block; width: 25%; border-bottom: 1px solid black;"></div>
+                        <div style="display: inline-block; width: 10%;">мин</div>
+                    </div>
+                </div>
+                <div style="display: inline-block; width: 49%">
+                    <div style="margin-bottom: 0.5rem;">
+                        <div style="display: inline-block; width: 35%;">Место подачи:</div>
+                        <div style="display: inline-block; width: 64%; border-bottom: 1px solid black;"></div>
+                    </div>
+                    <div>
+                        <div style="display: inline-block; width: 10%;">до</div>
+                        <div style="display: inline-block; width: 25%; border-bottom: 1px solid black;"></div>
+                        <div style="display: inline-block; width: 10%;">ч</div>
+                        <div style="display: inline-block; width: 25%; border-bottom: 1px solid black;"></div>
+                        <div style="display: inline-block; width: 10%;">мин</div>
+                    </div>
+                    <div style="margin-bottom: 0.5rem;">
+                        <div style="display: inline-block; width: 35%;">Место подачи:</div>
+                        <div style="display: inline-block; width: 64%; border-bottom: 1px solid black;"></div>
+                    </div>
+                    <div>
+                        <div style="display: inline-block; width: 10%;">до</div>
+                        <div style="display: inline-block; width: 25%; border-bottom: 1px solid black;"></div>
+                        <div style="display: inline-block; width: 10%;">ч</div>
+                        <div style="display: inline-block; width: 25%; border-bottom: 1px solid black;"></div>
+                        <div style="display: inline-block; width: 10%;">мин</div>
+                    </div>
+                </div>
+            </div>
+
+            <table border="0" cellspacing="0" cellpadding="3" style="margin-bottom: 1rem;">
+                <tr>
+                    <td rowspan="2">Смена</td>
+                    <td colspan="2">По расписанию</td>
+                    <td colspan="2">Фактически</td>
+                </tr>
+                <tr>
+                    <td>Выезд</td>
+                    <td>Возврат</td>
+                    <td>Выезд</td>
+                    <td>Возврат</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    @{
+                        IEnumerable<WayBillFlightLists> tsh1 = Model.WayBillFlightLists.Where(w => w.NumberShift == 1).OrderBy(o => o.TimeBegin);
+                        <td>@tsh1.First().TimeBegin</td>
+                        <td>@tsh1.Last().TimeEnd</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    }
+                </tr>
+                <tr>
+                    <td>2</td>
+                    @{
+                        IEnumerable<WayBillFlightLists> tsh2 = Model.WayBillFlightLists.Where(w => w.NumberShift == 2).OrderBy(o => o.TimeBegin);
+                        <td>
+                            @if (tsh2.Count() > 0)
+                            {
+                                @tsh2.First().TimeBegin
+                            }
+                        </td>
+                        <td>
+                            @if (tsh2.Count() > 0)
+                            {
+                                @tsh2.Last().TimeEnd
+                            }
+                        </td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    }
+                </tr>
+            </table>
+
+            <div style="display: inline-block; width: 100%; margin-bottom: 1rem;">
+                <div style="margin-bottom: 0.5rem;">
+                    <div style="display: inline-block; width: 5rem;">В гараже:</div>
+                    <div style="display: inline-block; width: 1rem;">с</div>
+                    <div style="display: inline-block; width: 4rem; border-bottom: 1px solid black;"></div>
+                    <div style="display: inline-block; width: 1rem;">ч</div>
+                    <div style="display: inline-block; width: 4rem; border-bottom: 1px solid black;"></div>
+                    <div style="display: inline-block; width: 2rem;">мин</div>
+                    <div style="display: inline-block; width: 1rem;">до</div>
+                    <div style="display: inline-block; width: 4rem; border-bottom: 1px solid black;"></div>
+                    <div style="display: inline-block; width: 1rem;">ч</div>
+                    <div style="display: inline-block; width: 4rem; border-bottom: 1px solid black;"></div>
+                    <div style="display: inline-block; width: 2rem;">мин</div>
+                </div>
+                <div style="margin-bottom: 0.5rem;">
+                    <div style="display: inline-block; width: 5rem;">Причина:</div>
+                    <div style="display: inline-block; width: 20rem; border-bottom: 1px solid black;"></div>
+                </div>
+                <div style="margin-bottom: 0.5rem;">
+                    <div style="display: inline-block; width: 5rem;">&nbsp;</div>
+                    <div style="display: inline-block; width: ;">с</div>
+                    <div style="display: inline-block; width: 5rem; border-bottom: 1px solid black;"></div>
+                    <div style="display: inline-block; width: ;">ч</div>
+                    <div style="display: inline-block; width: 5rem; border-bottom: 1px solid black;"></div>
+                    <div style="display: inline-block; width: ;">мин</div>
+                </div>
+                <div style="margin-bottom: 0.5rem;">
+                    <div style="display: inline-block; width: 5rem;">Причина:</div>
+                    <div style="display: inline-block; width: 20rem; border-bottom: 1px solid black;"></div>
+                </div>
+                <div style="margin-bottom: 0.5rem;">
+                    <div style="display: inline-block; width: 5rem;">На линии:</div>
+                    <div style="display: inline-block; width: ;">с</div>
+                    <div style="display: inline-block; width: 5rem; border-bottom: 1px solid black;"></div>
+                    <div style="display: inline-block; width: ;">ч</div>
+                    <div style="display: inline-block; width: 5rem; border-bottom: 1px solid black;"></div>
+                    <div style="display: inline-block; width: ;">мин</div>
+                </div>
+                <div style="margin-bottom: 0.5rem;">
+                    <div style="display: inline-block; width: 5rem;">Причина:</div>
+                    <div style="display: inline-block; width: 20rem; border-bottom: 1px solid black;"></div>
+                </div>
+                <div style="margin-bottom: 0.5rem;">
+                    <div style="display: inline-block; width: 5rem;">&nbsp;</div>
+                    <div style="display: inline-block; width: ;">с</div>
+                    <div style="display: inline-block; width: 5rem; border-bottom: 1px solid black;"></div>
+                    <div style="display: inline-block; width: ;">ч</div>
+                    <div style="display: inline-block; width: 5rem; border-bottom: 1px solid black;"></div>
+                    <div style="display: inline-block; width: ;">мин</div>
+                </div>
+                <div style="margin-bottom: 0.5rem; width: 100%;">
+                    <div style="display: inline-block; width: 5rem;">Причина:</div>
+                    <div style="display: inline-block; width: 25rem; border-bottom: 1px solid black;"></div>
+                </div>
+            </div>
+            <div style="margin-bottom: 0.5rem; width: 100%;">
+                <div style="display: inline-block; width: 12rem;">Отметка линейного контроля<br />Обслуживание в пути</div>
+                <div style="display: inline-block; width: 18rem; border-bottom: 1px solid black;"></div>
+            </div>
         </div>
+
         <div class="form-col-3">
-            3
+
+            <table border="0" cellspacing="0" cellpadding="3" style="margin-bottom: 1rem;">
+                <thead>
+                    <tr>
+                        <td width="50%">&nbsp;</td>
+                        <td width="15%">А76/ДТ</td>
+                        <td width="15%">Газ</td>
+                        <td width="20%">Подпись</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Замер остатка при выезде:</td>
+                        <td style="border: 2px solid black;">&nbsp;</td>
+                        <td style="border: 2px solid black;">&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td>Выдано топлива</td>
+                        <td style="border: 2px solid black;">&nbsp;</td>
+                        <td style="border: 2px solid black;">&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td>Выдано топлива</td>
+                        <td style="border: 2px solid black;">&nbsp;</td>
+                        <td style="border: 2px solid black;">&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+
+                    <tr>
+                        <td>Замер остатка при возврате:</td>
+                        <td style="border: 2px solid black;">&nbsp;</td>
+                        <td style="border: 2px solid black;">&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td>Остаток бака на конец смены</td>
+                        <td style="border: 2px solid black;">&nbsp;</td>
+                        <td style="border: 2px solid black;">&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td>Расход по норме<br />(температура=%t)</td>
+                        <td style="border: 2px solid black;">&nbsp;</td>
+                        <td style="border: 2px solid black;">&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td>Фактический</td>
+                        <td style="border: 2px solid black;">&nbsp;</td>
+                        <td style="border: 2px solid black;">&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td>Экономия</td>
+                        <td style="border: 2px solid black;">&nbsp;</td>
+                        <td style="border: 2px solid black;">&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td>Перерасход</td>
+                        <td style="border: 2px solid black;">&nbsp;</td>
+                        <td style="border: 2px solid black;">&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <table border="0" cellspacing="0" cellpadding="3" style="margin-bottom: 1rem;">
+                <thead>
+                    <tr>
+                        <td width="50%">Показатели</td>
+                        <td width="50%"></td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Количество часов работы водителя</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Количество часов работы кондуктора</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Количество часов работы стажера</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Плановое задание</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Фактическая выручка</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Наличная выручка</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Количество пассажиров</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Общий пробег</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Рейсы: План</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Фактически</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>График</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">Путевка обработана</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </section>
 
