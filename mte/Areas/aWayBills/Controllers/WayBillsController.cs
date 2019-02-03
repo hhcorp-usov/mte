@@ -51,7 +51,7 @@ namespace mte.Areas.aWayBills.Controllers
         // сведения см. в статье https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,WNumber,DateAdd,DateClose,EnterprisesId,WayBillStatusesId,CarsId")] WayBills wayBills)
+        public async Task<ActionResult> Create([Bind(Include = "Id,WNumber,DateAdd,DateClose,EnterprisesId,WayBillStatusesId,CarsId,OdometrStart,OdometrStop")] WayBills wayBills)
         {
             if (ModelState.IsValid)
             {
@@ -89,7 +89,7 @@ namespace mte.Areas.aWayBills.Controllers
         // сведения см. в статье https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,WNumber,DateAdd,DateClose,EnterprisesId,WayBillStatusesId,CarsId")] WayBills wayBills)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,WNumber,DateAdd,DateClose,EnterprisesId,WayBillStatusesId,CarsId,OdometrStart,OdometrStop")] WayBills wayBills)
         {
             if (ModelState.IsValid)
             {

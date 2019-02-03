@@ -15,11 +15,23 @@
         <ul class="uk-navbar-nav">
             <li>
                 <a href="@Url.Action("Index", "Manage", new { area = "" })">
-                    <span uk-icon="icon: user; ratio: 1.3"></span>&nbsp;
+                    <span uk-icon="icon: users; ratio: 1.3"></span>&nbsp;
                     @currentUserText
                 </a>
             </li>
-            <li><a href="javascript:document.getElementById('logoutForm').submit()">Выйти</a></li>
+            <li>
+                <a href="javascript:document.getElementById('logoutForm').submit()">
+                    <span uk-icon="icon: sign-out; ratio: 1.3"></span>&nbsp;
+                    Выйти
+                </a>
+            </li>
+            <li class="uk-nav-divider"></li>
+            <li>
+                <a href="">
+                    <span uk-icon="icon: database; ratio: 1.3"></span>&nbsp;
+                    @currentUser.AdditionalUserInfo.GlobalContainers.Name.Trim()
+                </a>
+            </li>
         </ul>
     }
 }

@@ -19,9 +19,13 @@ namespace mte.Areas.Guides.Controllers
         // GET: Guides/Enterprises
         public async Task<ActionResult> Index()
         {
-            var currentUserId = User.Identity.GetUserId();
-            ApplicationUser u = dbu.Users.FirstOrDefault(x => x.Id == currentUserId);
-            return View(await db.Enterprises.Where(w => w.GlobalContainersId == u.AdditionalUserInfo.GlobalContainersId).ToListAsync());
+            // Get current userid
+            ApplicationUser u = dbu.Users.FirstOrDefault(x => x.Id == User.Identity.GetUserId());
+            var vd = await db.Enterprises
+                .Where(w => w.GlobalContainersId == u.AdditionalUserInfo.GlobalContainersId)
+                .OrderBy(o=>o.Inn)
+                .ToListAsync();
+            return View(vd);
         }
 
         // GET: Guides/Enterprises/Details/5

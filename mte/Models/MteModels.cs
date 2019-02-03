@@ -255,6 +255,9 @@ namespace mte.Models
         public int? WayBillStatusesId { get; set; }
         public int? CarsId { get; set; }
 
+        public int OdometrStart { get; set; }
+        public int OdometrStop { get; set; }
+
         public virtual Enterprises Enterprises { get; set; }
         public virtual WayBillStatuses WayBillStatuses { get; set; }
         public virtual Cars Cars { get; set; }

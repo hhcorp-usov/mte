@@ -9,9 +9,6 @@
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-           
-
-
             modelBuilder.Entity<Routes>().HasRequired(p => p.PointStart).WithMany().HasForeignKey(k => k.PointStartId);
             modelBuilder.Entity<Routes>().HasRequired(p => p.PointStop).WithMany().HasForeignKey(k => k.PointStopId);
         }
