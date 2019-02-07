@@ -1,0 +1,193 @@
+﻿@import url('https://fonts.googleapis.com/css?family=Play:400,700&subset=cyrillic');
+
+html {
+    font-family: Play;
+    font-size: 12px;
+    color: black;
+    margin: 0px;
+    padding: 0px;
+}
+
+body {
+    margin: 0px;
+    padding: 0px;
+}
+
+.grid {
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+}
+
+    .grid > div {
+        vertical-align: top;
+        padding: 5px 10px;
+    }
+
+.width-1 {
+    width: 88mm;
+    display: inline-block;
+    margin: 0px;
+}
+
+.width-2 {
+    width: 152mm;
+    display: inline-block;
+    margin: 0px;
+}
+
+.width-3 {
+    width: 100mm;
+    display: inline-block;
+    margin: 0px;
+}
+
+.width-4 {
+    width: 16mm;
+    display: inline-block;
+    margin: 0px;
+}
+
+.width-10pr {
+    width: 10%;
+    display: inline-block;
+    margin: 0px;
+}
+
+.width-15pr {
+    width: 15%;
+    display: inline-block;
+    margin: 0px;
+}
+
+.width-20pr {
+    width: 20%;
+    display: inline-block;
+    margin: 0px;
+}
+
+.width-30pr {
+    width: 29%;
+    display: inline-block;
+    margin: 0px;
+}
+
+.width-35pr {
+    width: 35%;
+    display: inline-block;
+    margin: 0px;
+}
+
+.width-40pr {
+    width: 40%;
+    display: inline-block;
+    margin: 0px;
+}
+
+.width-70pr {
+    width: 69%;
+    display: inline-block;
+    margin: 0px;
+}
+
+.width-79pr {
+    width: 79%;
+    display: inline-block;
+    margin: 0px;
+}
+
+.width-85pr {
+    width: 84%;
+    display: inline-block;
+    margin: 0px;
+}
+
+.width-50 {
+    width: 49%;
+    display: inline-block;
+    margin: 0px;
+}
+
+.width-60 {
+    width: 59%;
+    display: inline-block;
+    margin: 0px;
+}
+
+.width-65pr {
+    width: 64%;
+    display: inline-block;
+    margin: 0px;
+}
+
+.width-100 {
+    width: 100%;
+}
+
+.header {
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.caps {
+    text-transform: uppercase;
+}
+
+.small {
+    font-size: 0.8em;
+}
+
+.inline-block {
+    display: inline-block;
+}
+
+.underline-div {
+    border-bottom: 1px solid black;
+}
+
+.right {
+    text-align: right;
+}
+
+.float-right {
+    float: right;
+}
+
+.margintop10 {
+    margin-top: 10px;
+}
+
+.margintop20 {
+    margin-top: 20px;
+}
+
+.margintop50 {
+    margin-top: 50px;
+}
+
+.borderright {
+    border-right: 1px solid black;
+}
+
+.bordertop {
+    border-top: 1px solid black;
+}
+
+.tableborder tr > td, .tableborder {
+    border: 1px solid black;
+    padding: 5px;
+    border-collapse: collapse;
+    border-spacing: 0px;
+}
+
+.tableborderh tr {
+    height: 7mm;
+}
+
+.tableborderh tr > td {
+    vertical-align: bottom;
+}

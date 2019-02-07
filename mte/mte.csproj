@@ -221,6 +221,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\custom.css" />
+    <Content Include="Content\print.css" />
     <Content Include="Content\uikit.css" />
     <Content Include="Content\uikit.min.css" />
     <Content Include="favicon.ico" />

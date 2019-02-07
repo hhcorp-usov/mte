@@ -146,6 +146,8 @@ namespace mte.Areas.aWayBills.Controllers
             ViewBag.EnterprisesId = new SelectList(db.Enterprises, "Id", "Name", wayBills.EnterprisesId);
             ViewBag.WayBillStatusesId = new SelectList(db.WayBillStatuses, "Id", "Name", wayBills.WayBillStatusesId);
 
+            //return View(wayBills);
+
             return new Rotativa.ViewAsPdf(wayBills)
             {
                 PageMargins = new Rotativa.Options.Margins(5, 5, 5, 5),
