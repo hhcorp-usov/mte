@@ -21,27 +21,33 @@
 
 <body>
 
-    <div class="uk-section uk-section-primary uk-section-xsmall">
-        <nav class="uk-navbar-container uk-navbar-transparent" uk-navbar>
-            <div class="uk-navbar-left">
-                @Html.ActionLink("MTE", "Index", "Home", new { area = "" }, new { @class = "uk-navbar-item uk-logo" })
+    <section class="uk-section-primary uk-preserve-color">
+        <div uk-sticky="animation: uk-animation-slide-top; sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky; cls-inactive: uk-navbar-transparent uk-light; top: 200">
+            <nav class="uk-navbar-container" uk-navbar>
+                <div class="uk-navbar-left">
+                    <a href="@Url.Action("Index", "Home", new { area = "" })" class="uk-navbar-item uk-logo">
+                        <span uk-icon="icon: server; ratio: 1;" class="uk-margin-small-right"></span>
+                        MTE
+                    </a>
 
-                @Html.Partial("Menu/TopMenu")
-            </div>
+                    @Html.Partial("Menu/TopMenu")
+                </div>
 
-            <div class="uk-navbar-right">
-                @Html.Partial("_LoginPartial")
-            </div>
-        </nav>
-    </div>
+                <div class="uk-navbar-right">
+                    @Html.Partial("_LoginPartial")
+                </div>
+            </nav>
+        </div>
+    </section>
 
-    <div uk-height-viewport="expand: true" class="uk-section uk-section-default uk-section-xsmall">
-        <div class="uk-container uk-container-expand">@RenderBody()</div>
-    </div>
 
-    <div class="uk-section uk-section-secondary uk-section-xsmall">
-        <div class="uk-container uk-container-expand">&copy; @DateTime.Now.Year - HHCorp</div>
-    </div>
+    <section uk-height-viewport="expand: true" class="uk-section uk-section-default uk-section-xsmall">
+        <div class="uk-container uk-container-expand">
+            @RenderBody()
+        </div>
+    </section>
+
+    @Html.Partial("Footer/Footer")
 
 </body>
 </html>

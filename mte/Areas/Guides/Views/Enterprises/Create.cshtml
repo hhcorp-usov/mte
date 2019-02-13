@@ -1,17 +1,11 @@
-﻿@model mte.Models.Enterprises
-
-@{
-    ViewBag.Title = "Create";
-}
+﻿@model mte.Guides.Enterprises
 
 <h2>Create</h2>
 
-@Scripts.Render("~/bundles/jqueryval")
-
-@using (Html.BeginForm())
+@using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
-
+    
     <div class="form-horizontal">
         <h4>Enterprises</h4>
         <hr />
@@ -21,6 +15,14 @@
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.FullName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.FullName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FullName, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -49,18 +51,28 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.FAdress, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.LocateF, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.FAdress, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.FAdress, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.LocateF, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.LocateF, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.YAdress, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.LocateU, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.YAdress, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.YAdress, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.LocateU, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.LocateU, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model._Deleted, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model._Deleted)
+                    @Html.ValidationMessageFor(model => model._Deleted, "", new { @class = "text-danger" })
+                </div>
             </div>
         </div>
 
@@ -75,3 +87,7 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

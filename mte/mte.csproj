@@ -206,6 +206,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\CustomHelpers.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -403,9 +404,10 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\Menu\TopMenu.cshtml" />
-    <Content Include="Views\Shared\Menu\LeftMenu_Guide.cshtml" />
-    <Content Include="Views\Shared\Menu\LeftMenu_Waybill.cshtml" />
+    <Content Include="Views\Shared\Menu\LeftMenu_Guides.cshtml" />
+    <Content Include="Views\Shared\Menu\LeftMenu_aWayBills.cshtml" />
     <Content Include="Views\Shared\Menu\LeftMenu_Smena.cshtml" />
+    <Content Include="Views\Shared\Footer\Footer.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

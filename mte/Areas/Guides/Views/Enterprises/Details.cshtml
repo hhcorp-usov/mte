@@ -1,4 +1,4 @@
-﻿@model mte.Models.Enterprises
+﻿@model mte.Guides.Enterprises
 
 @{
     ViewBag.Title = "Details";
@@ -16,6 +16,14 @@
 
         <dd>
             @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FullName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FullName)
         </dd>
 
         <dt>
@@ -43,24 +51,32 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.FAdress)
+            @Html.DisplayNameFor(model => model.LocateF)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.FAdress)
+            @Html.DisplayFor(model => model.LocateF)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.YAdress)
+            @Html.DisplayNameFor(model => model.LocateU)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.YAdress)
+            @Html.DisplayFor(model => model.LocateU)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model._Deleted)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model._Deleted)
         </dd>
 
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.EnterpriseId }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

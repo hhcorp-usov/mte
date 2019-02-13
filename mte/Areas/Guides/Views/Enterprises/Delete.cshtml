@@ -1,4 +1,4 @@
-﻿@model mte.Models.Enterprises
+﻿@model mte.Guides.Enterprises
 
 @{
     ViewBag.Title = "Delete";
@@ -17,6 +17,14 @@
 
         <dd>
             @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FullName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FullName)
         </dd>
 
         <dt>
@@ -44,19 +52,27 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.FAdress)
+            @Html.DisplayNameFor(model => model.LocateF)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.FAdress)
+            @Html.DisplayFor(model => model.LocateF)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.YAdress)
+            @Html.DisplayNameFor(model => model.LocateU)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.YAdress)
+            @Html.DisplayFor(model => model.LocateU)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model._Deleted)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model._Deleted)
         </dd>
 
     </dl>
