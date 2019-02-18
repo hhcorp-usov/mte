@@ -122,10 +122,14 @@ namespace mte.Areas.Guides.Controllers
         // сведения см. в статье https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,Name,Inn,Kpp,Ogrn,FAdress,YAdress")] Enterprises enterprises)
+        public async Task<ActionResult> Create([Bind(Include = "Id,Name,Inn,Kpp,Ogrn,FAdress,YAdress,Phones")] Enterprises enterprises)
         {
             if (ModelState.IsValid)
             {
+                var uid = User.Identity.GetUserId();
+                ApplicationUser u = dbu.Users.FirstOrDefault(x => x.Id == uid);
+                enterprises.GlobalContainersId = u.AdditionalUserInfo.GlobalContainersId;
+
                 db.Enterprises.Add(enterprises);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
@@ -154,10 +158,14 @@ namespace mte.Areas.Guides.Controllers
         // сведения см. в статье https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,Name,Inn,Kpp,Ogrn,FAdress,YAdress")] Enterprises enterprises)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,Name,Inn,Kpp,Ogrn,FAdress,YAdress,Phones")] Enterprises enterprises)
         {
             if (ModelState.IsValid)
             {
+                var uid = User.Identity.GetUserId();
+                ApplicationUser u = dbu.Users.FirstOrDefault(x => x.Id == uid);
+                enterprises.GlobalContainersId = u.AdditionalUserInfo.GlobalContainersId;
+
                 db.Entry(enterprises).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
@@ -186,7 +194,8 @@ namespace mte.Areas.Guides.Controllers
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
             Enterprises enterprises = await db.Enterprises.FindAsync(id);
-            db.Enterprises.Remove(enterprises);
+            enterprises._deleted = true;
+            db.Entry(enterprises).State = EntityState.Modified;
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }

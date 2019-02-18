@@ -161,9 +161,10 @@
 
             var footer = new TagBuilder("div");
             footer.AddCssClass("uk-card-footer");
-            footer.InnerHtml = htmlHelper.ActionLink("Перейти", "Index", "Enterprises", new { area = "Guides" }, new { @class = "uk-button uk-button-text" }).ToString();
+            footer.InnerHtml = htmlHelper.ActionLink("Перейти", "Index", GuideController, new { area = "Guides" }, new { @class = "uk-button uk-button-text" }).ToString();
 
-            container.InnerHtml = header.ToString() + body.ToString() + footer.ToString();
+            //container.InnerHtml = header.ToString() + body.ToString() + footer.ToString();
+            container.InnerHtml = header.ToString() + footer.ToString();
 
             return MvcHtmlString.Create("<div>" + container.ToString() + "</div>");
         }

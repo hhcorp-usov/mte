@@ -1,8 +1,10 @@
-﻿@model mte.Guides.Enterprises
+﻿@model mte.Models.Enterprises
 
 @{
     ViewBag.Title = "Delete";
 }
+
+@Scripts.Render("~/bundles/jqueryval")
 
 <h2>Delete</h2>
 
@@ -17,14 +19,6 @@
 
         <dd>
             @Html.DisplayFor(model => model.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.FullName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.FullName)
         </dd>
 
         <dt>
@@ -52,32 +46,33 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.LocateF)
+            @Html.DisplayNameFor(model => model.FAdress)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.LocateF)
+            @Html.DisplayFor(model => model.FAdress)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.LocateU)
+            @Html.DisplayNameFor(model => model.YAdress)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.LocateU)
+            @Html.DisplayFor(model => model.YAdress)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model._Deleted)
+            @Html.DisplayNameFor(model => model._deleted)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model._Deleted)
+            @Html.DisplayFor(model => model._deleted)
         </dd>
 
     </dl>
 
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
