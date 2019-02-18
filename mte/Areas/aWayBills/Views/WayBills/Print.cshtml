@@ -71,7 +71,7 @@
 
         <div class="grid margintop10">
 
-            <div class="width-1 borderright">
+            <div class="width-1 borderright" style="height: 225mm;">
                 <div>
                     Прошел предрейсовый контроль технического состояния транспортного средства. Автобус технически исправен. Выезд разрешен.
                 </div>
@@ -245,12 +245,17 @@
                     </tr>
                     <tr>
                         <td width="20%">Выезд</td>
-                        <td width="20%" class="right">@Model.OdometrStart</td>
+                        <td width="20%" class="center">@Model.OdometrStart</td>
                         <td>&nbsp;</td>
                     </tr>
                     <tr>
                         <td>Возврат</td>
-                        <td class="right">@if (Model.OdometrStop > 0) { @Model.OdometrStop   }</td>
+                        <td class="right">
+                            @if (Model.OdometrStop > 0)
+                            {
+                                @Model.OdometrStop
+                            }
+                        </td>
                         <td>&nbsp;</td>
                     </tr>
                 </table>
@@ -264,48 +269,53 @@
                 </div>
             </div>
 
-            <div class="width-2 borderright">
+            <div class="width-2 borderright" style="height: 225mm;">
                 <div>
                     <div>
-                        <div class="inline-block width-20pr bold">Марка автобуса</div>
+                        <div class="inline-block width-20pr bold">Марка автобуса:</div>
                         <div class="inline-block width-79pr underline-div">
                             @Model.Cars.CarBrands.Name
                         </div>
                     </div>
                     <div class="margintop10">
-                        <div class="inline-block width-20pr bold">Гос. номер</div>
+                        <div class="inline-block width-20pr bold">Гос. номер:</div>
                         <div class="inline-block width-30pr underline-div">@Model.Cars.PIdent</div>
-                        <div class="inline-block width-20pr bold">Гаражный номер</div>
+                        <div class="inline-block width-20pr center bold">Гаражный номер:</div>
                         <div class="inline-block width-30pr underline-div">@Model.Cars.BIdent</div>
                     </div>
                 </div>
 
-                <table border="0" cellspacing="0" cellpadding="3" class="margintop20 tableborder">
+                <table border="0" cellspacing="0" cellpadding="3" class="margintop20 tableborder width-100">
                     <tr>
                         <td rowspan="2">Фамилия, Имя, Отчество</td>
-                        <td rowspan="2" width="10%">Табельный номер</td>
+                        <td rowspan="2" width="15%">Таб. номер</td>
                         <td colspan="2">Номер</td>
                     </tr>
                     <tr>
                         <td>Удостоверения</td>
-                        <td>Билетно-учетного листа</td>
+                        <td>Б/учетного листа</td>
                     </tr>
-                    @foreach (var item in Model.WayBillTeams)
+                    @foreach (var item in Model.WayBillTeams.OrderBy(o => o.NumberShift))
                     {
                         if (item.Employers.Posts.IsDriver || item.Employers.Posts.IsConductor)
                         {
                             <tr>
                                 <td>
-                                    @item.Employers.FirstName
-                                    &nbsp;
-                                    @item.Employers.Name
-                                    &nbsp;
-                                    @item.Employers.SurName
+                                    <div>
+                                        @item.Employers.FirstName
+                                        &nbsp;
+                                        @item.Employers.Name
+                                        &nbsp;
+                                        @item.Employers.SurName
+                                    </div>
+                                    <div class="small">
+                                        @item.Employers.Posts.Name
+                                    </div>
                                 </td>
-                                <td class="right">
+                                <td class="center">
                                     @item.Employers.IIdent
                                 </td>
-                                <td width="20 %"></td>
+                                <td width="20%"></td>
                                 <td width="20%"></td>
                             </tr>
                         }
@@ -315,10 +325,10 @@
                 <div class="margintop20">
                     <div class="inline-block width-20pr bold">Маршрут:</div>
                     <div class="inline-block width-79pr underline-div">
-                        @{ var Routes = Model.WayBillFlightLists.GroupBy(g => g.Routes).ToList();
+                        @{  var Routes = Model.WayBillFlightLists.GroupBy(g => g.BoardsName).ToList();
                             foreach (var item in Routes)
                             {
-                                <div>@item.Key.Name</div>
+                                <div>@item.Key</div>
                             }
                         }
                     </div>
@@ -386,7 +396,7 @@
                     Выезд и возвращение автобуса:
                 </div>
 
-                <table border="0" cellspacing="0" cellpadding="3" class="margintop10 tableborder width-100">
+                <table border="0" cellspacing="0" cellpadding="3" class="margintop5 tableborder width-100">
                     <tr>
                         <td rowspan="2" width="20%">Смена</td>
                         <td colspan="2">По расписанию</td>
@@ -432,7 +442,7 @@
 
                 <div class="margintop10">
                     <div>
-                        <div class="inline-block width-20pr">Диспетчер:</div>
+                        <div class="inline-block width-20pr bold">Диспетчер:</div>
                         <div class="inline-block width-79pr">
                             <div class="inline-block width-30pr">&nbsp;</div>
                             <div class="inline-block width-70pr right">
@@ -479,55 +489,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>&nbsp;</td>
-                        <td>
-                            <div class="inline-block">с</div>
-                            <div class="inline-block underline-div width-4">&nbsp;</div>
-                            <div class="inline-block">ч.</div>
-                            <div class="inline-block underline-div width-4">&nbsp;</div>
-                            <div class="inline-block">мин.</div>
-                        </td>
-                        <td class="right">
-                            <div class="inline-block">с</div>
-                            <div class="inline-block underline-div width-4">&nbsp;</div>
-                            <div class="inline-block">ч.</div>
-                            <div class="inline-block underline-div width-4">&nbsp;</div>
-                            <div class="inline-block">мин.</div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>&nbsp;</td>
-                        <td colspan="2">
-                            <div class="inline-block width-15pr">Причина:</div>
-                            <div class="inline-block width-85pr underline-div">&nbsp;</div>
-                        </td>
-                    </tr>
-                    <tr>
                         <td class="bold">На линии:</td>
-                        <td>
-                            <div class="inline-block">с</div>
-                            <div class="inline-block underline-div width-4">&nbsp;</div>
-                            <div class="inline-block">ч.</div>
-                            <div class="inline-block underline-div width-4">&nbsp;</div>
-                            <div class="inline-block">мин.</div>
-                        </td>
-                        <td class="right">
-                            <div class="inline-block">с</div>
-                            <div class="inline-block underline-div width-4">&nbsp;</div>
-                            <div class="inline-block">ч.</div>
-                            <div class="inline-block underline-div width-4">&nbsp;</div>
-                            <div class="inline-block">мин.</div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>&nbsp;</td>
-                        <td colspan="2">
-                            <div class="inline-block width-15pr">Причина:</div>
-                            <div class="inline-block width-85pr underline-div">&nbsp;</div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>&nbsp;</td>
                         <td>
                             <div class="inline-block">с</div>
                             <div class="inline-block underline-div width-4">&nbsp;</div>
@@ -558,7 +520,7 @@
                 </div>
             </div>
 
-            <div class="width-3">
+            <div class="width-3" style="height: 225mm;">
                 <table border="0" cellspacing="0" cellpadding="3" class="tableborder width-100">
                     <thead>
                         <tr>
@@ -688,10 +650,10 @@
         </div>
     </div>
 
-    @{
-        int lineNumber = 0;
+    @{  
+        int lineNumber = 0; 
     }
-    
+
     <div style="height: 249mm; width: 359mm;">
         <table border="0" cellspacing="0" cellpadding="3" style="height:58.4rem;" class="tableborder">
             <thead>
@@ -809,7 +771,6 @@
             </tbody>
         </table>
     </div>
-
 </body>
 </html>
 

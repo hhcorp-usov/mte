@@ -153,8 +153,16 @@ body {
     text-align: right;
 }
 
+.center {
+    text-align: center;
+}
+
 .float-right {
     float: right;
+}
+
+.margintop5 {
+    margin-top: 5px;
 }
 
 .margintop10 {
@@ -162,7 +170,7 @@ body {
 }
 
 .margintop20 {
-    margin-top: 20px;
+    margin-top: 15px;
 }
 
 .margintop50 {

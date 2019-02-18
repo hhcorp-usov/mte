@@ -20,7 +20,8 @@ namespace mte.Areas.Guides.Controllers
         public async Task<ActionResult> Index()
         {
             // Get current userid
-            ApplicationUser u = dbu.Users.FirstOrDefault(x => x.Id == User.Identity.GetUserId());
+            var uid = User.Identity.GetUserId();
+            ApplicationUser u = dbu.Users.FirstOrDefault(x => x.Id == uid);
             var vd = await db.Enterprises
                 .Where(w => w.GlobalContainersId == u.AdditionalUserInfo.GlobalContainersId)
                 .OrderBy(o=>o.Inn)

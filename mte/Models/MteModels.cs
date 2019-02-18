@@ -302,6 +302,7 @@ namespace mte.Models
         public int RoutesId { get; set; }
         public decimal RLength { get; set; }
         public bool IsBack { get; set; }
+        public string BoardsName { get; set; }
 
         public virtual WayBills WayBills { get; set; }
         public virtual Routes Routes { get; set; }
