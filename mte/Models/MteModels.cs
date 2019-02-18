@@ -1,11 +1,37 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
-
-namespace mte.Models
+﻿namespace mte.Models
 {
+    using System.ComponentModel.DataAnnotations;
+    using System.Collections.Generic;
+    using System;
+    using System.Web.Configuration;
+
+    public class BaseSettings
+    {
+        public int bs_itemsPerPage = Convert.ToInt32(WebConfigurationManager.AppSettings["itemsPerPage"]);
+    }
+
+    public class PagingInfo
+    {
+        public int TotalItems { get; set; }
+        public int ItemsPerPage { get; set; }
+        public int CurrentPage { get; set; }
+        public int TotalPages
+        {
+            get { return (int)Math.Ceiling((decimal)TotalItems / ItemsPerPage); }
+        }
+
+        public string Search { get; set; }
+        public string Sort_filter { get; set; }
+        public string Sort_order { get; set; }
+    }
+
+    public partial class EnterprisesView
+    {
+        public IEnumerable<Enterprises> Enterprises { get; set; }
+        public Enterprises ModelInfo { get; set; }
+        public PagingInfo PageInfo { get; set; }
+    }
+
     public partial class GlobalContainers
     {
         [Key]
@@ -27,6 +53,8 @@ namespace mte.Models
         public string FAdress { get; set; }
         public string YAdress { get; set; }
         public string Phones { get; set; }
+
+        public bool _deleted { get; set; }
     }
 
     public partial class Posts

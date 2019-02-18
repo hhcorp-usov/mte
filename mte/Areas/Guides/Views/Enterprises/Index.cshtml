@@ -1,63 +1,194 @@
-﻿@model IEnumerable<mte.Models.Enterprises>
+﻿@using mte.Models;
+@using mte.Helpers;
+
+@model EnterprisesView
 
 @{
-    ViewBag.Title = "Index";
+    var f_item = Model.Enterprises.Count() > 0 ? Model.Enterprises.First().Id : 0;
 }
 
-<h2>Index</h2>
+<div uk-grid>
+    <div class="uk-width-expand">
+        <h3>Справочники / Организации</h3>
+    </div>
+    <div class="uk-width-1-5"></div>
+</div>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Inn)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Kpp)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Ogrn)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FAdress)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.YAdress)
-        </th>
-        <th></th>
-    </tr>
+<nav class="uk-navbar-container-default uk-margin" uk-navbar>
+    <div class="uk-navbar-left uk-flex uk-toolbar-width">
+        <button id="btn-add" class="uk-button uk-button-primary">Добавить</button>
+        <button id="btn-view" class="uk-button uk-button-primary">Просмотр</button>
+        <button id="btn-edit" class="uk-button uk-button-primary">Изменить</button>
+        <button id="btn-delete" class="uk-button uk-button-danger">Удалить</button>
+    </div>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Inn)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Kpp)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Ogrn)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FAdress)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.YAdress)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
+    <div class="uk-navbar-right uk-flex">
+        <div class="uk-inline">
+            @Html.EditorFor(model => model.PageInfo.Search, new { htmlAttributes = new { id = "toolbar-search", @class = "uk-input uk-width-auto", placeholder = "Поиск" } })
+        </div>
+        <button id="btn-find" class="uk-button uk-button-primary uk-padding-remove-top uk-padding-remove-bottom uk-padding-small"><span uk-icon="icon: search"></span></button>
+        @if (!string.IsNullOrEmpty(Request.QueryString["search"]))
+        {
+            <button id="btn-find-cancel" class="uk-button uk-button-danger uk-padding-remove-top uk-padding-remove-bottom uk-padding-small"><span uk-icon="icon: close"></span></button>
+        }
+    </div>
+</nav>
+
+@if (Model.PageInfo.TotalItems > 0)
+{
+    var f_1 = (Model.PageInfo.Sort_filter == "inn") ? Model.PageInfo.Sort_order : "";
+    var f_2 = (Model.PageInfo.Sort_filter == "kpp") ? Model.PageInfo.Sort_order : "";
+    var f_3 = (Model.PageInfo.Sort_filter == "name") ? Model.PageInfo.Sort_order : "";
+
+    <div uk-height-viewport="expand: true">
+        <table class="uk-table uk-table-divider uk-table-hover uk-table-small uk-table-striped">
+            <thead>
+                <tr>
+                    <th class="uk-table-shrink uk-text-middle" data-field="inn" data-sort="@f_1">
+                        @Html.DisplayNameFor(model => model.ModelInfo.Inn)
+                        @switch (f_1)
+                        {
+                            case "asc":
+                                <span uk-icon="icon: triangle-up; ratio: 1"></span>
+                                break;
+                            case "desc": 
+                                <span uk-icon="icon: triangle-down; ratio: 1"></span>
+                                break;
+                        }
+                    </th>
+                    <th class="uk-table-shrink uk-text-middle" data-field="kpp" data-sort="@f_2">
+                        @Html.DisplayNameFor(model => model.ModelInfo.Kpp)
+                        @switch (f_2)
+                        {
+                            case "asc":
+                                <span uk-icon="icon: triangle-up; ratio: 1"></span>
+                                break;
+                            case "desc":
+                                <span uk-icon="icon: triangle-down; ratio: 1"></span>
+                                break;
+                        }
+                    </th>
+                    <th class="uk-table-expand uk-text-middle" data-field="name" data-sort="@f_3">
+                        @Html.DisplayNameFor(model => model.ModelInfo.Name)
+                        @switch (f_3)
+                        {
+                            case "asc":
+                                <span uk-icon="icon: triangle-up; ratio: 1"></span>
+                                break;
+                            case "desc":
+                                <span uk-icon="icon: triangle-down; ratio: 1"></span>
+                                break;
+                        }
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Enterprises)
+                {
+                    var is_active = (item.Id == f_item) ? "uk-active" : "";
+
+                    <tr data-id="@item.Id" class="@is_active" style="cursor: pointer;">
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Inn)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Kpp)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    @Html.PageLinks(Model.PageInfo, x => Url.Action("Index", new { page = x, search = Model.PageInfo.Search, sort_order = Model.PageInfo.Sort_order, sort_filter = Model.PageInfo.Sort_filter }))
+}
+else
+{
+    @Html._ErrorNoData()
 }
 
-</table>
+<script type="text/javascript">
+
+    var currentItem = @f_item;
+    var currentActive = true;
+
+    $(document).ready(function () {
+
+        $('#toolbar-search').keyup(function () {
+            if ($(this).val().length > 0) {
+                $('#btn-find').removeClass('uk-disabled').removeClass('uk-button-default').addClass('uk-button-primary')
+                $('#btn-find-cancel').removeClass('uk-disabled').removeClass('uk-button-default').addClass('uk-button-danger')
+            } else {
+                $('#btn-find').addClass('uk-disabled').removeClass('uk-button-primary').addClass('uk-button-default')
+                $('#btn-find-cancel').addClass('uk-disabled').removeClass('uk-button-danger').addClass('uk-button-default')
+            }
+        });
+
+        $('table > thead > tr > th').on('click', function (e) {
+            currentSortField = $(this).data('field')
+            currentSortType = $(this).data('sort')
+
+            if (currentSortField == '@Model.PageInfo.Sort_filter') {
+                currentSortType = (currentSortType == 'asc') ? 'desc' : 'asc';
+            }
+
+            url = '@Url.Action("Index", "Enterprises", new { area = "Guides" })?page=@Model.PageInfo.CurrentPage' + '&search=' + $('#toolbar-search').val() + '&sort_order=' + currentSortType + '&sort_filter=' + currentSortField
+            location.href = url
+        });
+
+        $('table > tbody > tr > td').on('click', function (e) {
+            currentActive = !$(this).parent('tr').hasClass('uk-active')
+            $('table > tbody > tr').removeClass('uk-active')
+
+            if (currentActive) {
+                currentItem = $(this).parent('tr').data('id')
+                $('#btn-view').removeClass('uk-disabled').removeClass('uk-button-default').addClass('uk-button-primary')
+                $('#btn-edit').removeClass('uk-disabled').removeClass('uk-button-default').addClass('uk-button-primary')
+                $('#btn-delete').removeClass('uk-disabled').removeClass('uk-button-default').addClass('uk-button-danger')
+                $(this).parent('tr').addClass('uk-active')
+            }
+            else {
+                currentItem = 0;
+                $('#btn-view').addClass('uk-disabled').removeClass('uk-button-primary').addClass('uk-button-default')
+                $('#btn-edit').addClass('uk-disabled').removeClass('uk-button-primary').addClass('uk-button-default')
+                $('#btn-delete').addClass('uk-disabled').removeClass('uk-button-danger').addClass('uk-button-default')
+            }
+        });
+
+        $('#btn-add').on('click', function (e) {
+            url = '@Url.Action("Create", "Enterprises", new { area = "Guides" })'
+            location.href = url
+        });
+
+        $('#btn-view').on('click', function (e) {
+            url = '@Url.Action("Details", "Enterprises", new { area = "Guides" })/' + currentItem
+            location.href = url
+        });
+
+        $('#btn-edit').on('click', function (e) {
+            url = '@Url.Action("Edit", "Enterprises", new { area = "Guides" })/' + currentItem
+            location.href = url
+        });
+
+        $('#btn-delete').on('click', function (e) {
+            UIkit.modal.confirm('Удалить выбранный элемент?').then(function () {
+                url = '@Url.Action("Delete", "Enterprises", new { area = "Guides" })/' + currentItem
+                location.href = url
+            });
+        });
+
+        $('#btn-find').on('click', function (e) {
+            url = '@Url.Action("Index", "Enterprises", new { area = "Guides" })?page=@Model.PageInfo.CurrentPage' + '&search=' + $('#toolbar-search').val() + '&sort_order=@Model.PageInfo.Sort_order' + '&sort_filter=@Model.PageInfo.Sort_filter'
+            location.href = url
+        });
+
+        $('#btn-find-cancel').on('click', function (e) {
+            $('#toolbar-search').val(null);
+            $('#btn-find').click();
+        });
+    });
+
+</script>

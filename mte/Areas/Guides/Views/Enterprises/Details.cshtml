@@ -4,6 +4,8 @@
     ViewBag.Title = "Details";
 }
 
+@Scripts.Render("~/bundles/jqueryval")
+
 <h2>Details</h2>
 
 <div>
@@ -56,6 +58,14 @@
 
         <dd>
             @Html.DisplayFor(model => model.YAdress)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model._deleted)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model._deleted)
         </dd>
 
     </dl>

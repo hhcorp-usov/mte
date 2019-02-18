@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Net;
-using Microsoft.AspNet.Identity;
 using System.Web.Mvc;
 using mte.Models;
+using Microsoft.AspNet.Identity;
 
 namespace mte.Areas.Guides.Controllers
 {
@@ -15,18 +13,87 @@ namespace mte.Areas.Guides.Controllers
     {
         private MteDataContexts db = new MteDataContexts();
         private ApplicationDbContext dbu = new ApplicationDbContext();
+        private BaseSettings bs = new BaseSettings();
+
 
         // GET: Guides/Enterprises
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(int page = 1, string search = null, string sort_filter = null, string sort_order = null)
         {
-            // Get current userid
+            var list_count = 0;
+            var list = from b in db.Enterprises select b;
+
             var uid = User.Identity.GetUserId();
             ApplicationUser u = dbu.Users.FirstOrDefault(x => x.Id == uid);
-            var vd = await db.Enterprises
-                .Where(w => w.GlobalContainersId == u.AdditionalUserInfo.GlobalContainersId)
-                .OrderBy(o=>o.Inn)
-                .ToListAsync();
-            return View(vd);
+
+            sort_filter = string.IsNullOrEmpty(sort_filter) ? "inn" : sort_filter;
+            sort_order = string.IsNullOrEmpty(sort_order) ? "asc" : sort_order;
+
+            list = list.Where(w => w._deleted != true).Where(w => w.GlobalContainersId == u.AdditionalUserInfo.GlobalContainersId);
+            if (!string.IsNullOrEmpty(search))
+            {
+                list = list.Where(w => w.Inn.ToUpper().Contains(search.ToUpper()) || w.Kpp.ToUpper().Contains(search.ToUpper()) || w.Name.ToUpper().Contains(search.ToUpper()));
+            }
+
+            switch (sort_filter.ToLower())
+            {
+                case "inn":
+                    switch (sort_order.ToLower())
+                    {
+                        case "asc":
+                            list = list.OrderBy(o => o.Inn);
+                            break;
+
+                        case "desc":
+                            list = list.OrderByDescending(o => o.Inn);
+                            break;
+                    }
+                    break;
+
+                case "kpp":
+                    switch (sort_order.ToLower())
+                    {
+                        case "asc":
+                            list = list.OrderBy(o => o.Kpp);
+                            break;
+
+                        case "desc":
+                            list = list.OrderByDescending(o => o.Kpp);
+                            break;
+                    }
+                    break;
+
+                case "name":
+                    switch (sort_order.ToLower())
+                    {
+                        case "asc":
+                            list = list.OrderBy(o => o.Name);
+                            break;
+
+                        case "desc":
+                            list = list.OrderByDescending(o => o.Name);
+                            break;
+                    }
+                    break;
+            }
+
+            list_count = await list.CountAsync();
+            list = list.Skip((page - 1) * bs.bs_itemsPerPage).Take(bs.bs_itemsPerPage);
+
+            EnterprisesView model = new EnterprisesView
+            {
+                Enterprises = await list.ToListAsync(),
+                PageInfo = new PagingInfo
+                {
+                    CurrentPage = page,
+                    ItemsPerPage = bs.bs_itemsPerPage,
+                    Search = search,
+                    Sort_order = sort_order,
+                    Sort_filter = sort_filter,
+                    TotalItems = list_count
+                }
+            };
+
+            return View(model);
         }
 
         // GET: Guides/Enterprises/Details/5
@@ -55,10 +122,14 @@ namespace mte.Areas.Guides.Controllers
         // сведения см. в статье https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,Name,Inn,Kpp,Ogrn,FAdress,YAdress")] Enterprises enterprises)
+        public async Task<ActionResult> Create([Bind(Include = "Id,Name,Inn,Kpp,Ogrn,FAdress,YAdress,Phones")] Enterprises enterprises)
         {
             if (ModelState.IsValid)
             {
+                var uid = User.Identity.GetUserId();
+                ApplicationUser u = dbu.Users.FirstOrDefault(x => x.Id == uid);
+                enterprises.GlobalContainersId = u.AdditionalUserInfo.GlobalContainersId;
+
                 db.Enterprises.Add(enterprises);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
@@ -87,10 +158,14 @@ namespace mte.Areas.Guides.Controllers
         // сведения см. в статье https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,Name,Inn,Kpp,Ogrn,FAdress,YAdress")] Enterprises enterprises)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,Name,Inn,Kpp,Ogrn,FAdress,YAdress,Phones")] Enterprises enterprises)
         {
             if (ModelState.IsValid)
             {
+                var uid = User.Identity.GetUserId();
+                ApplicationUser u = dbu.Users.FirstOrDefault(x => x.Id == uid);
+                enterprises.GlobalContainersId = u.AdditionalUserInfo.GlobalContainersId;
+
                 db.Entry(enterprises).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
@@ -119,7 +194,8 @@ namespace mte.Areas.Guides.Controllers
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
             Enterprises enterprises = await db.Enterprises.FindAsync(id);
-            db.Enterprises.Remove(enterprises);
+            enterprises._deleted = true;
+            db.Entry(enterprises).State = EntityState.Modified;
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
@@ -128,6 +204,7 @@ namespace mte.Areas.Guides.Controllers
         {
             if (disposing)
             {
+                dbu.Dispose();
                 db.Dispose();
             }
             base.Dispose(disposing);

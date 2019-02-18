@@ -14,40 +14,36 @@
 </head>
 
 <body>
-
-    <div class="uk-section uk-section-primary uk-section-xsmall">
-        <nav class="uk-navbar-container uk-navbar-transparent" uk-navbar>
+    <section class="uk-section-primary">
+        <nav class="uk-preserve-color uk-navbar-container uk-navbar-transparent" uk-navbar>
             <div class="uk-navbar-left">
-                @Html.ActionLink("MTE", "Index", "Home", new { area = "" }, new { @class = "uk-navbar-item uk-logo" })
-
+                <a href="@Url.Action(" Index", "Home" , new { area="" })" class="uk-navbar-item uk-logo">
+                    <span uk-icon="icon: server; ratio: 1;" class="uk-margin-small-right"></span>
+                    MTE
+                </a>
                 @Html.Partial("Menu/TopMenu")
             </div>
-
             <div class="uk-navbar-right">
                 @Html.Partial("_LoginPartial")
             </div>
         </nav>
-    </div>
+    </section>
 
-    <div uk-height-viewport="expand: true">
-        <div uk-grid class="uk-child-width-expand">
-            <div class="uk-width-1-5">
-                <div class="uk-section uk-section-secondary uk-section-xsmall">
-                    <div class="uk-card uk-card-body uk-padding-small">
-                        @Html.Partial("Menu/LeftMenu_Guide")
-                    </div>
+    <section>
+        <div uk-grid uk-height-viewport="expand: true" class="uk-child-width-expand uk-grid-collapse">
+            <div class="uk-card-secondary uk-width-medium">
+                <div class="uk-card uk-card-body uk-card-small">
+                    @Html.Partial("Menu/LeftMenu_" + ViewContext.RouteData.DataTokens["area"])
                 </div>
             </div>
-            <div>
-                <div class="uk-section uk-section-default uk-section-xsmall">@RenderBody()</div>
+            <div class="uk-card-default">
+                <div class="uk-card uk-card-body uk-card-small">
+                    @RenderBody()
+                </div>
             </div>
         </div>
-        
-    </div>
+    </section>
 
-    <div class="uk-section uk-section-secondary uk-section-xsmall">
-        <div class="uk-container uk-container-expand">&copy; @DateTime.Now.Year – приложение ASP.NET</div>
-    </div>
-
+    @Html.Partial("Footer/Footer")
 </body>
 </html>

@@ -1,5 +1,28 @@
 ﻿@import url('https://fonts.googleapis.com/css?family=Play:400,700&subset=cyrillic');
 
-nav.uk-navbar-container {
-    height: 20px;
+html {
+    font-family: "Play" !important;
+    font-size: 14px !important;
+}
+
+h1, .uk-h1, h2, .uk-h2, h3, .uk-h3, 
+h4, .uk-h4, h5, .uk-h5, h6, .uk-h6 {
+    font-family: "Play" !important;
+}
+
+.uk-navbar-nav > li > a,
+.uk-navbar-item,
+.uk-navbar-toggle {
+    font-family: "Play" !important;
+    font-size: 1rem !important;
+    min-height: 50px !important;
+}
+
+.uk-logo {
+    font-family: "Play" !important;
+    font-size: 1rem !important;
+}
+
+.uk-nav-default {
+    font-size: 1rem !important;
 }
