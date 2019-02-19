@@ -26,3 +26,11 @@ h4, .uk-h4, h5, .uk-h5, h6, .uk-h6 {
 .uk-nav-default {
     font-size: 1rem !important;
 }
+
+.uk-nav {
+    text-transform: uppercase !important;
+}
+
+.uk-table-hover {
+    cursor: pointer !important;
+}

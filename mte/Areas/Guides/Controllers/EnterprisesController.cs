@@ -19,6 +19,8 @@ namespace mte.Areas.Guides.Controllers
         // GET: Guides/Enterprises
         public async Task<ActionResult> Index(int page = 1, string search = null, string sort_filter = null, string sort_order = null)
         {
+            ViewBag.PageTitle = "Справочники / Организации";
+
             var list_count = 0;
             var list = from b in db.Enterprises select b;
 

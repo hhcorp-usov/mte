@@ -1,0 +1,42 @@
+﻿@model mte.Models.MonthTablesTeams
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>MonthTablesTeams</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Employers.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Employers.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MonthTablesCars.Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MonthTablesCars.Id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NumberShift)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NumberShift)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

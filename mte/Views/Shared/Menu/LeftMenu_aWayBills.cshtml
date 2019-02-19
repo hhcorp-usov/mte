@@ -1,5 +1,11 @@
-﻿<ul class="uk-nav uk-nav-default">
-    <li>@Html.ActionLink("Путевые листы", "Index", "WayBills", new { area = "aWayBills" }, new { })</li>
-    <li>@Html.ActionLink("Путевые листы - Экипаж", "Index", "WayBillTeams", new { area = "aWayBills" }, new { })</li>
-    <li>@Html.ActionLink("Путевые листы - Расписание", "Index", "WayBillFlightLists", new { area = "aWayBills" }, new { })</li>
+﻿@using mte.Helpers
+
+<ul class="uk-nav uk-nav-default">
+    @Html.MenuItem("Путевые листы", "Index", "WayBills", "aWayBills")
+    @Html.MenuItem("Путевые листы - Экипаж", "Index", "WayBillTeams", "aWayBills")
+    @Html.MenuItem("Путевые листы - Расписание", "Index", "WayBillFlightLists", "aWayBills")
+    <li class="uk-nav-divider"></li>
+    @Html.MenuItem("График работы (Месяц)", "Index", "MonthTables", "aWayBills")
+    @Html.MenuItem("График работы (Месяц) - ТС", "Index", "MonthTablesCars", "aWayBills")
+    @Html.MenuItem("График работы (Месяц) - Экипаж", "Index", "MonthTablesTeams", "aWayBills")
 </ul>

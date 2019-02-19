@@ -1,8 +1,8 @@
-﻿<ul class="uk-navbar-nav">
-    <li>@Html.ActionLink("Главная", "Index", "Home", new { area = "" }, new { })</li>
+﻿@using mte.Helpers
 
-    <li>@Html.ActionLink("Справочники", "Index", "Home", new { area = "Guides" }, new { })</li>
-    <li>@Html.ActionLink("Путевые листы", "Index", "Home", new { area = "aWayBills" }, new { })</li>
-    <li>@Html.ActionLink("Смена", "Index", "Home", new { area = "Smena" }, new { })</li>
-
+<ul class="uk-navbar-nav">
+    @Html.MenuItemNav("Главная", "Index", "Home", "")
+    @Html.MenuItemNav("Справочники", "Index", "Home", "Guides")
+    @Html.MenuItemNav("Путевые листы", "Index", "Home", "aWayBills")
+    @Html.MenuItemNav("Смена", "Index", "Home", "Smena")
 </ul>

@@ -12,6 +12,7 @@ namespace mte.Areas.Guides.Controllers
         [Authorize]
         public ActionResult Index()
         {
+            ViewBag.PageTitle = "Справочники";
             return View();
         }
     }

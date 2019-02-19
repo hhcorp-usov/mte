@@ -7,32 +7,27 @@
     var f_item = Model.Enterprises.Count() > 0 ? Model.Enterprises.First().Id : 0;
 }
 
-<div uk-grid>
-    <div class="uk-width-expand">
-        <h3>Справочники / Организации</h3>
-    </div>
-    <div class="uk-width-1-5"></div>
-</div>
-
-<nav class="uk-navbar-container-default uk-margin" uk-navbar>
-    <div class="uk-navbar-left uk-flex uk-toolbar-width">
-        <button id="btn-add" class="uk-button uk-button-primary">Добавить</button>
-        <button id="btn-view" class="uk-button uk-button-primary">Просмотр</button>
-        <button id="btn-edit" class="uk-button uk-button-primary">Изменить</button>
-        <button id="btn-delete" class="uk-button uk-button-danger">Удалить</button>
-    </div>
-
-    <div class="uk-navbar-right uk-flex">
-        <div class="uk-inline">
-            @Html.EditorFor(model => model.PageInfo.Search, new { htmlAttributes = new { id = "toolbar-search", @class = "uk-input uk-width-auto", placeholder = "Поиск" } })
+<div class="uk-margin">
+    <nav class="uk-navbar-container-default" uk-navbar>
+        <div class="uk-navbar-left uk-flex uk-toolbar-width">
+            <button id="btn-add" class="uk-button uk-button-primary">Добавить</button>
+            <button id="btn-view" class="uk-button uk-button-primary">Просмотр</button>
+            <button id="btn-edit" class="uk-button uk-button-primary">Изменить</button>
+            <button id="btn-delete" class="uk-button uk-button-danger">Удалить</button>
         </div>
-        <button id="btn-find" class="uk-button uk-button-primary uk-padding-remove-top uk-padding-remove-bottom uk-padding-small"><span uk-icon="icon: search"></span></button>
-        @if (!string.IsNullOrEmpty(Request.QueryString["search"]))
-        {
-            <button id="btn-find-cancel" class="uk-button uk-button-danger uk-padding-remove-top uk-padding-remove-bottom uk-padding-small"><span uk-icon="icon: close"></span></button>
-        }
-    </div>
-</nav>
+
+        <div class="uk-navbar-right uk-flex">
+            <div class="uk-inline">
+                @Html.EditorFor(model => model.PageInfo.Search, new { htmlAttributes = new { id = "toolbar-search", @class = "uk-input uk-width-auto", placeholder = "Поиск" } })
+            </div>
+            <button id="btn-find" class="uk-button uk-button-primary uk-padding-remove-top uk-padding-remove-bottom uk-padding-small"><span uk-icon="icon: search"></span></button>
+            @if (!string.IsNullOrEmpty(Request.QueryString["search"]))
+            {
+                <button id="btn-find-cancel" class="uk-button uk-button-danger uk-padding-remove-top uk-padding-remove-bottom uk-padding-small"><span uk-icon="icon: close"></span></button>
+            }
+        </div>
+    </nav>
+</div>
 
 @if (Model.PageInfo.TotalItems > 0)
 {
@@ -51,7 +46,7 @@
                             case "asc":
                                 <span uk-icon="icon: triangle-up; ratio: 1"></span>
                                 break;
-                            case "desc": 
+                            case "desc":
                                 <span uk-icon="icon: triangle-down; ratio: 1"></span>
                                 break;
                         }
@@ -87,7 +82,7 @@
                 {
                     var is_active = (item.Id == f_item) ? "uk-active" : "";
 
-                    <tr data-id="@item.Id" class="@is_active" style="cursor: pointer;">
+                    <tr data-id="@item.Id" class="@is_active">
                         <td>
                             @Html.DisplayFor(modelItem => item.Inn)
                         </td>

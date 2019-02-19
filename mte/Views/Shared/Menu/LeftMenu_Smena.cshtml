@@ -1,3 +1,5 @@
-﻿<ul class="uk-nav uk-nav-default">
-    <li>@Html.ActionLink("Рабочая смена", "Index", "Smenes", new { area = "Smena" }, new { })</li>
+﻿@using mte.Helpers
+
+<ul class="uk-nav uk-nav-default">
+    @Html.MenuItem("Рабочая смена", "Index", "Smenes", "Smena")
 </ul>

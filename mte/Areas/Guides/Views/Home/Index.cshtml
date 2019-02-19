@@ -1,28 +1,19 @@
-﻿@using mte.Helpers;
+﻿@using mte.Helpers
 
-<div uk-grid>
-    <div class="uk-width-expand">
-        <h3>Справочники</h3>
-    </div>
-    <div class="uk-width-1-5"></div>
-</div>
-
-<div class="uk-grid-small uk-child-width-1-4     uk-flex-left" uk-grid="masonry: true">
-
-    @Html.GuideFlexCard("Enterprises", "Организации", "Описание")
-    @Html.GuideFlexCard("Posts", "Должности", "Описание")
-    @Html.GuideFlexCard("Employers", "Сотрудники", "Описание")
-    @Html.GuideFlexCard("CarBrands", "Марки ТС", "Описание")
-    @Html.GuideFlexCard("CarTypes", "Типы ТС", "Описание")
-    @Html.GuideFlexCard("Cars", "Транспортные средства", "Описание")
-    @Html.GuideFlexCard("PointTypes", "Типы остановок", "Описание")
-    @Html.GuideFlexCard("Points", "Остановки", "Описание")
-    @Html.GuideFlexCard("RouteTypes", "Типы маршрутов", "Описание")
-    @Html.GuideFlexCard("Routes", "Маршруты", "Описание")
-    @Html.GuideFlexCard("RoutePoints", "Остановки маршрутов", "Описание")
-    @Html.GuideFlexCard("WorkTypes", "Типы работ", "Описание")
-    @Html.GuideFlexCard("Boards", "Расписания", "Описание")
-    @Html.GuideFlexCard("BoardFlightLists", "Элементы расписания", "Описание")
-    @Html.GuideFlexCard("WayBillStatuses", "Состояния путвого листа", "Описание")
-
-</div>
+<table class="uk-table uk-table-divider uk-table-hover uk-table-small uk-table-striped">
+    @Html.GuideTableLine("Enterprises", "Организации", "Описание")
+    @Html.GuideTableLine("Posts", "Должности", "Описание")
+    @Html.GuideTableLine("Employers", "Сотрудники", "Описание")
+    @Html.GuideTableLine("CarBrands", "Марки ТС", "Описание")
+    @Html.GuideTableLine("CarTypes", "Типы ТС", "Описание")
+    @Html.GuideTableLine("Cars", "Транспортные средства", "Описание")
+    @Html.GuideTableLine("PointTypes", "Типы остановок", "Описание")
+    @Html.GuideTableLine("Points", "Остановки", "Описание")
+    @Html.GuideTableLine("RouteTypes", "Типы маршрутов", "Описание")
+    @Html.GuideTableLine("Routes", "Маршруты", "Описание")
+    @Html.GuideTableLine("RoutePoints", "Остановки маршрутов", "Описание")
+    @Html.GuideTableLine("WorkTypes", "Типы работ", "Описание")
+    @Html.GuideTableLine("Boards", "Расписания", "Описание")
+    @Html.GuideTableLine("BoardFlightLists", "Элементы расписания", "Описание")
+    @Html.GuideTableLine("WayBillStatuses", "Состояния путвого листа", "Описание")
+</table>

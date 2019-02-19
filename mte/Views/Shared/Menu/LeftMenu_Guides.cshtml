@@ -1,22 +1,24 @@
-﻿<ul class="uk-nav uk-nav-default">
-    <li>@Html.ActionLink("Организации", "Index", "Enterprises", new { area = "Guides" }, new { })</li>
+﻿@using mte.Helpers
+
+<ul class="uk-nav uk-nav-default">
+    @Html.MenuItem("Организации", "Index", "Enterprises", "Guides")
     <li class="uk-nav-divider"></li>
-    <li>@Html.ActionLink("Должности", "Index", "Posts", new { area = "Guides" }, new { })</li>
-    <li>@Html.ActionLink("Сотрудники", "Index", "Employers", new { area = "Guides" }, new { })</li>
+    @Html.MenuItem("Должности", "Index", "Posts", "Guides")
+    @Html.MenuItem("Сотрудники", "Index", "Employers", "Guides")
     <li class="uk-nav-divider"></li>
-    <li>@Html.ActionLink("Марки ТС", "Index", "CarBrands", new { area = "Guides" }, new { })</li>
-    <li>@Html.ActionLink("Типы ТС", "Index", "CarTypes", new { area = "Guides" }, new { })</li>
-    <li>@Html.ActionLink("Транспортные средства", "Index", "Cars", new { area = "Guides" }, new { })</li>
+    @Html.MenuItem("Марки ТС", "Index", "CarBrands", "Guides")
+    @Html.MenuItem("Типы ТС", "Index", "CarTypes", "Guides")
+    @Html.MenuItem("Транспортные средства", "Index", "Cars", "Guides")
     <li class="uk-nav-divider"></li>
-    <li>@Html.ActionLink("Типы остановок", "Index", "PointTypes", new { area = "Guides" }, new { })</li>
-    <li>@Html.ActionLink("Остановки", "Index", "Points", new { area = "Guides" }, new { })</li>
-    <li>@Html.ActionLink("Типы маршрутов", "Index", "RouteTypes", new { area = "Guides" }, new { })</li>
-    <li>@Html.ActionLink("Маршруты", "Index", "Routes", new { area = "Guides" }, new { })</li>
-    <li>@Html.ActionLink("Остановки маршрутов", "Index", "RoutePoints", new { area = "Guides" }, new { })</li>
+    @Html.MenuItem("Типы остановок", "Index", "PointTypes", "Guides")
+    @Html.MenuItem("Остановки", "Index", "Points", "Guides")
+    @Html.MenuItem("Типы маршрутов", "Index", "RouteTypes", "Guides")
+    @Html.MenuItem("Маршруты", "Index", "Routes", "Guides")
+    @Html.MenuItem("Остановки маршрутов", "Index", "RoutePoints", "Guides")
     <li class="uk-nav-divider"></li>
-    <li>@Html.ActionLink("Типы работ", "Index", "WorkTypes", new { area = "Guides" }, new { })</li>
-    <li>@Html.ActionLink("Расписания", "Index", "Boards", new { area = "Guides" }, new { })</li>
-    <li>@Html.ActionLink("Элементы расписания", "Index", "BoardFlightLists", new { area = "Guides" }, new { })</li>
+    @Html.MenuItem("Типы работ", "Index", "WorkTypes", "Guides")
+    @Html.MenuItem("Расписания", "Index", "Boards", "Guides")
+    @Html.MenuItem("Элементы расписания", "Index", "BoardFlightLists", "Guides")
     <li class="uk-nav-divider"></li>
-    <li>@Html.ActionLink("Состояния путевого листа", "Index", "WayBillStatuses", new { area = "Guides" }, new { })</li>
+    @Html.MenuItem("Состояния путевого листа", "Index", "WayBillStatuses", "Guides")
 </ul>

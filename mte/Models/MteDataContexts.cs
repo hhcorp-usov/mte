@@ -48,5 +48,10 @@
 
         // Smena
         public DbSet<Smenes> Smenes { get; set; }
+
+        // MonthTables
+        public DbSet<MonthTables> MonthTables { get; set; }
+        public DbSet<MonthTablesCars> MonthTablesCars { get; set; }
+        public DbSet<MonthTablesTeams> MonthTablesTeams { get; set; }
     }
 }

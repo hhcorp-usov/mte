@@ -175,6 +175,9 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Areas\aWayBills\Controllers\MonthTablesCarsController.cs" />
+    <Compile Include="Areas\aWayBills\Controllers\MonthTablesController.cs" />
+    <Compile Include="Areas\aWayBills\Controllers\MonthTablesTeamsController.cs" />
     <Compile Include="Areas\aWayBills\Controllers\WayBillsController.cs" />
     <Compile Include="Areas\Guides\Controllers\BoardFlightListsController.cs" />
     <Compile Include="Areas\Guides\Controllers\BoardsController.cs" />
@@ -212,11 +215,6 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MteDataContexts.cs" />
     <Compile Include="Models\MteModels.cs" />
-    <Compile Include="MvcSiteMapSchema.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>MvcSiteMapSchema.xsd</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -327,10 +325,6 @@
     <Content Include="Areas\aWayBills\Views\WayBills\Index.cshtml" />
     <Content Include="Areas\aWayBills\Views\WayBills\Print.cshtml" />
     <Content Include="App_Browsers\qt.browser" />
-    <Content Include="Mvc.sitemap" />
-    <Content Include="MvcSiteMapSchema.xsc">
-      <DependentUpon>MvcSiteMapSchema.xsd</DependentUpon>
-    </Content>
     <Content Include="Areas\Smena\Views\web.config" />
     <Content Include="Areas\Smena\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Smena\Views\Shared\_Layout.cshtml" />
@@ -340,14 +334,22 @@
     <Content Include="Areas\Smena\Views\Smenes\Details.cshtml" />
     <Content Include="Areas\Smena\Views\Smenes\Edit.cshtml" />
     <Content Include="Areas\Smena\Views\Smenes\Index.cshtml" />
-    <None Include="MvcSiteMapSchema.xsd">
-      <SubType>Designer</SubType>
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>MvcSiteMapSchema.Designer.cs</LastGenOutput>
-    </None>
-    <Content Include="MvcSiteMapSchema.xss">
-      <DependentUpon>MvcSiteMapSchema.xsd</DependentUpon>
-    </Content>
+    <Content Include="Areas\aWayBills\Views\MonthTables\Create.cshtml" />
+    <Content Include="Areas\aWayBills\Views\MonthTables\Delete.cshtml" />
+    <Content Include="Areas\aWayBills\Views\MonthTables\Details.cshtml" />
+    <Content Include="Areas\aWayBills\Views\MonthTables\Edit.cshtml" />
+    <Content Include="Areas\aWayBills\Views\MonthTables\Index.cshtml" />
+    <Content Include="Areas\aWayBills\Views\MonthTablesCars\Create.cshtml" />
+    <Content Include="Areas\aWayBills\Views\MonthTablesCars\Delete.cshtml" />
+    <Content Include="Areas\aWayBills\Views\MonthTablesCars\Details.cshtml" />
+    <Content Include="Areas\aWayBills\Views\MonthTablesCars\Edit.cshtml" />
+    <Content Include="Areas\aWayBills\Views\MonthTablesCars\Index.cshtml" />
+    <Content Include="Areas\aWayBills\Views\MonthTablesTeams\Create.cshtml" />
+    <Content Include="Areas\aWayBills\Views\MonthTablesTeams\Delete.cshtml" />
+    <Content Include="Areas\aWayBills\Views\MonthTablesTeams\Details.cshtml" />
+    <Content Include="Areas\aWayBills\Views\MonthTablesTeams\Edit.cshtml" />
+    <Content Include="Areas\aWayBills\Views\MonthTablesTeams\Index.cshtml" />
+    <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Rotativa\help-wkhtmltoimage.txt" />
     <Content Include="Rotativa\help-wkhtmltopdf.txt" />

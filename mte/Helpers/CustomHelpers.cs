@@ -38,6 +38,11 @@
             var currentController = routeData.GetRequiredString("controller");
             var currentArea = routeData.DataTokens["area"] as string;
 
+            if (string.IsNullOrEmpty(currentArea))
+            {
+                currentArea = "";
+            }
+
             if (string.Equals(currentArea, area, StringComparison.OrdinalIgnoreCase))
             {
                 li.AddCssClass("uk-active");
@@ -142,31 +147,18 @@
             return MvcHtmlString.Create(container.ToString());
         }
 
-        public static MvcHtmlString GuideFlexCard(this HtmlHelper htmlHelper, string GuideController, string SName, string SDesc)
+        public static MvcHtmlString GuideTableLine(this HtmlHelper htmlHelper, string GuideController, string SName, string SDesc)
         {
-            var container = new TagBuilder("div");
-            container.AddCssClass("uk-card uk-card-default");
+            var item = new TagBuilder("li");
 
-            var header = new TagBuilder("div");
-            header.AddCssClass("uk-card-header");
-            header.InnerHtml = 
-                "<div class=\"uk-grid-small uk-flex-middle\" uk-grid><div class=\"uk-width-auto\"><span uk-icon=\"grid\"></span></div><div class=\"uk-width-expand\">" +
-                "<h3 class=\"uk-card-title uk-margin-remove-bottom\">" +
-                SName +
-                "</h3></div></div>";
+            item.InnerHtml =
+                "<tr>" +
+                "<td class=\"uk-text-emphasis uk-text-uppercase uk-width-medium\">" + SName + "</td>" +
+                "<td>" + SDesc + "</td>" +
+                "<td>" + htmlHelper.ActionLink("Открыть", "Index", GuideController, new { area = "Guides" }, new { @class = "uk-button uk-button-text" }).ToString() + "</td>" +
+                "</tr>";
 
-            var body = new TagBuilder("div");
-            body.AddCssClass("uk-card-body");
-            body.InnerHtml = "<p>" + SDesc + "</p>";
-
-            var footer = new TagBuilder("div");
-            footer.AddCssClass("uk-card-footer");
-            footer.InnerHtml = htmlHelper.ActionLink("Перейти", "Index", GuideController, new { area = "Guides" }, new { @class = "uk-button uk-button-text" }).ToString();
-
-            //container.InnerHtml = header.ToString() + body.ToString() + footer.ToString();
-            container.InnerHtml = header.ToString() + footer.ToString();
-
-            return MvcHtmlString.Create("<div>" + container.ToString() + "</div>");
+            return MvcHtmlString.Create(item.ToString());
         }
     }
 }
