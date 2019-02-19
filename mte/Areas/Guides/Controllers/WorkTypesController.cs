@@ -47,7 +47,7 @@ namespace mte.Areas.Guides.Controllers
         // сведения см. в статье https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,Name,IsNullRun,IsWork,IsDinner,IsBreak")] WorkTypes workTypes)
+        public async Task<ActionResult> Create([Bind(Include = "Id,Name,ShortName,IsNullRun,IsWork,IsDinner,IsBreak")] WorkTypes workTypes)
         {
             if (ModelState.IsValid)
             {
@@ -79,7 +79,7 @@ namespace mte.Areas.Guides.Controllers
         // сведения см. в статье https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,Name,IsNullRun,IsWork,IsDinner,IsBreak")] WorkTypes workTypes)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,Name,ShortName,IsNullRun,IsWork,IsDinner,IsBreak")] WorkTypes workTypes)
         {
             if (ModelState.IsValid)
             {

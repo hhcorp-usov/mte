@@ -26,6 +26,12 @@
         <th>
             @Html.DisplayNameFor(model => model.WeekDayWorks)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RIdent)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.REIdent)
+        </th>
         <th></th>
     </tr>
 
@@ -47,9 +53,15 @@
             @Html.DisplayFor(modelItem => item.WeekDayWorks)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            @Html.DisplayFor(modelItem => item.RIdent)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.REIdent)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
         </td>
     </tr>
 }

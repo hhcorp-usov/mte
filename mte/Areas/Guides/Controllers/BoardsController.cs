@@ -49,7 +49,7 @@ namespace mte.Areas.Guides.Controllers
         // сведения см. в статье https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,Name,DateBegin,DateEnd,WeekDayWorks,EnterprisesId")] Boards boards)
+        public async Task<ActionResult> Create([Bind(Include = "Id,Name,DateBegin,DateEnd,WeekDayWorks,RIdent,REIdent,EnterprisesId")] Boards boards)
         {
             if (ModelState.IsValid)
             {
@@ -83,7 +83,7 @@ namespace mte.Areas.Guides.Controllers
         // сведения см. в статье https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,Name,DateBegin,DateEnd,WeekDayWorks,EnterprisesId")] Boards boards)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,Name,DateBegin,DateEnd,WeekDayWorks,RIdent,REIdent,EnterprisesId")] Boards boards)
         {
             if (ModelState.IsValid)
             {

@@ -209,6 +209,7 @@
         public int GlobalContainersId { get; set; }
 
         public string Name { get; set; }
+        public string ShortName { get; set; }
         public bool IsNullRun { get; set; }
         public bool IsWork { get; set; }
         public bool IsDinner { get; set; }
@@ -225,6 +226,9 @@
         public DateTime DateBegin { get; set; }
         public DateTime DateEnd { get; set; }
         public int WeekDayWorks { get; set; }
+
+        public string RIdent { get; set; }
+        public string REIdent { get; set; }
 
         public int? EnterprisesId { get; set; }
 
@@ -349,5 +353,121 @@
 
         public virtual Employers DispEmployers { get; set; }
         public virtual Employers ControlerEmployers { get; set; }
+    }
+
+    public partial class MonthTables
+    {
+        [Key]
+        public int Id { get; set; }
+        public int GlobalContainersId { get; set; }
+
+        public string Name { get; set; }
+        public int Month { get; set; }
+        public DateTime DateBegin { get; set; }
+        public DateTime DateEnd { get; set; }
+
+        public virtual List<MonthTablesCars> MonthTablesCars { get; set; }
+
+        public MonthTables()
+        {
+            MonthTablesCars = new List<MonthTablesCars>();
+        }
+    }
+
+    public partial class MonthTablesCars
+    {
+        [Key]
+        public int Id { get; set; }
+        public int GlobalContainersId { get; set; }
+
+        public int MonthTablesId { get; set; }
+        public int CarsId { get; set; }
+
+        public virtual MonthTables MonthTables { get; set; }
+        public virtual Cars Cars { get; set; }
+
+        public virtual List<MonthTablesTeams> MonthTablesTeams { get; set; }
+
+        public MonthTablesCars()
+        {
+            MonthTablesTeams = new List<MonthTablesTeams>();
+        }
+    }
+
+    public partial class MonthTablesTeams
+    {
+        [Key]
+        public int Id { get; set; }
+        public int GlobalContainersId { get; set; }
+
+        public int MonthTablesCarsId { get; set; }
+        public int EmployersId { get; set; }
+        public int NumberShift { get; set; }
+
+        public string D1_RIdent { get; set; }
+        public string D1_REIdent { get; set; }
+        public string D2_RIdent { get; set; }
+        public string D2_REIdent { get; set; }
+        public string D3_RIdent { get; set; }
+        public string D3_REIdent { get; set; }
+        public string D4_RIdent { get; set; }
+        public string D4_REIdent { get; set; }
+        public string D5_RIdent { get; set; }
+        public string D5_REIdent { get; set; }
+        public string D6_RIdent { get; set; }
+        public string D6_REIdent { get; set; }
+        public string D7_RIdent { get; set; }
+        public string D7_REIdent { get; set; }
+        public string D8_RIdent { get; set; }
+        public string D8_REIdent { get; set; }
+        public string D9_RIdent { get; set; }
+        public string D9_REIdent { get; set; }
+        public string D10_RIdent { get; set; }
+        public string D10_REIdent { get; set; }
+        public string D11_RIdent { get; set; }
+        public string D11_REIdent { get; set; }
+        public string D12_RIdent { get; set; }
+        public string D12_REIdent { get; set; }
+        public string D13_RIdent { get; set; }
+        public string D13_REIdent { get; set; }
+        public string D14_RIdent { get; set; }
+        public string D14_REIdent { get; set; }
+        public string D15_RIdent { get; set; }
+        public string D15_REIdent { get; set; }
+        public string D16_RIdent { get; set; }
+        public string D16_REIdent { get; set; }
+        public string D17_RIdent { get; set; }
+        public string D17_REIdent { get; set; }
+        public string D18_RIdent { get; set; }
+        public string D18_REIdent { get; set; }
+        public string D19_RIdent { get; set; }
+        public string D19_REIdent { get; set; }
+        public string D20_RIdent { get; set; }
+        public string D20_REIdent { get; set; }
+        public string D21_RIdent { get; set; }
+        public string D21_REIdent { get; set; }
+        public string D22_RIdent { get; set; }
+        public string D22_REIdent { get; set; }
+        public string D23_RIdent { get; set; }
+        public string D23_REIdent { get; set; }
+        public string D24_RIdent { get; set; }
+        public string D24_REIdent { get; set; }
+        public string D25_RIdent { get; set; }
+        public string D25_REIdent { get; set; }
+        public string D26_RIdent { get; set; }
+        public string D26_REIdent { get; set; }
+        public string D27_RIdent { get; set; }
+        public string D27_REIdent { get; set; }
+        public string D28_RIdent { get; set; }
+        public string D28_REIdent { get; set; }
+        public string D29_RIdent { get; set; }
+        public string D29_REIdent { get; set; }
+        public string D30_RIdent { get; set; }
+        public string D30_REIdent { get; set; }
+        public string D31_RIdent { get; set; }
+        public string D31_REIdent { get; set; }
+
+        public virtual MonthTablesCars MonthTablesCars { get; set; }
+        public virtual Employers Employers { get; set; }
     }
 }
