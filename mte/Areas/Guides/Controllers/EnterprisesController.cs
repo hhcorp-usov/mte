@@ -105,12 +105,17 @@ namespace mte.Areas.Guides.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Enterprises enterprises = await db.Enterprises.FindAsync(id);
+
+            var uid = User.Identity.GetUserId();
+            ApplicationUser u = dbu.Users.FirstOrDefault(x => x.Id == uid);
+            Enterprises enterprises = await db.Enterprises.Where(w => w.GlobalContainersId == u.AdditionalUserInfo.GlobalContainersId).Where(v=>v.Id == id).FirstAsync();
+
             if (enterprises == null)
             {
                 return HttpNotFound();
             }
-            return View(enterprises);
+
+            return PartialView(enterprises);
         }
 
         // GET: Guides/Enterprises/Create

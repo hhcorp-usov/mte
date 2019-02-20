@@ -4,6 +4,8 @@
     using System.Collections.Generic;
     using System;
     using System.Web.Configuration;
+    using System.ComponentModel;
+    using System.Web.Mvc;
 
     public class BaseSettings
     {
@@ -46,14 +48,22 @@
         public int Id { get; set; }
         public int GlobalContainersId { get; set; }
 
+        [DisplayName("Наименование")]
         public string Name { get; set; }
+        [DisplayName("ИНН")]
         public string Inn { get; set; }
+        [DisplayName("КПП")]
         public string Kpp { get; set; }
+        [DisplayName("ОГРН")]
         public string Ogrn { get; set; }
+        [DisplayName("Фактический адрес")]
         public string FAdress { get; set; }
+        [DisplayName("Юридический адрес")]
         public string YAdress { get; set; }
+        [DisplayName("Телефоны")]
         public string Phones { get; set; }
 
+        [HiddenInput(DisplayValue = false)]
         public bool _deleted { get; set; }
     }
 

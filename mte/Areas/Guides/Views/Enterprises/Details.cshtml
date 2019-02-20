@@ -1,76 +1,42 @@
 ﻿@model mte.Models.Enterprises
 
-@{
-    ViewBag.Title = "Details";
-}
+<h3 class="uk-heading-bullet uk-margin-medium-bottom">Просмотр организации</h3>
 
-@Scripts.Render("~/bundles/jqueryval")
-
-<h2>Details</h2>
-
-<div>
-    <h4>Enterprises</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Inn)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Inn)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Kpp)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Kpp)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Ogrn)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Ogrn)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.FAdress)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.FAdress)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.YAdress)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.YAdress)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model._deleted)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model._deleted)
-        </dd>
-
-    </dl>
+<div class="uk-child-width-1-1 uk-grid-small" uk-grid>
+    <div>
+        <div uk-grid>
+            <div class="uk-width-1-5">@Html.DisplayNameFor(model => model.Name)</div>
+            <div>@Html.DisplayFor(model => model.Name)</div>
+        </div>
+    </div>
+    <div>
+        <div uk-grid>
+            <div class="uk-width-1-5">@Html.DisplayNameFor(model => model.Inn) / @Html.DisplayNameFor(model => model.Kpp)</div>
+            <div>@Html.DisplayFor(model => model.Inn) / @Html.DisplayFor(model => model.Kpp)</div>
+        </div>
+    </div>
+    <div>
+        <div uk-grid>
+            <div class="uk-width-1-5">@Html.DisplayNameFor(model => model.Ogrn)</div>
+            <div>@Html.DisplayFor(model => model.Ogrn)</div>
+        </div>
+    </div>
+    <div>
+        <div uk-grid>
+            <div class="uk-width-1-5">@Html.DisplayNameFor(model => model.YAdress)</div>
+            <div>@Html.DisplayFor(model => model.YAdress)</div>
+        </div>
+    </div>
+    <div>
+        <div uk-grid>
+            <div class="uk-width-1-5">@Html.DisplayNameFor(model => model.FAdress)</div>
+            <div>@Html.DisplayFor(model => model.FAdress)</div>
+        </div>
+    </div>
+    <div>
+        <div uk-grid>
+            <div class="uk-width-1-5">@Html.DisplayNameFor(model => model.Phones)</div>
+            <div>@Html.DisplayFor(model => model.Phones)</div>
+        </div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

@@ -7,27 +7,30 @@
     var f_item = Model.Enterprises.Count() > 0 ? Model.Enterprises.First().Id : 0;
 }
 
-<div class="uk-margin">
-    <nav class="uk-navbar-container-default" uk-navbar>
-        <div class="uk-navbar-left uk-flex uk-toolbar-width">
-            <button id="btn-add" class="uk-button uk-button-primary">Добавить</button>
-            <button id="btn-view" class="uk-button uk-button-primary">Просмотр</button>
-            <button id="btn-edit" class="uk-button uk-button-primary">Изменить</button>
-            <button id="btn-delete" class="uk-button uk-button-danger">Удалить</button>
-        </div>
 
-        <div class="uk-navbar-right uk-flex">
-            <div class="uk-inline">
-                @Html.EditorFor(model => model.PageInfo.Search, new { htmlAttributes = new { id = "toolbar-search", @class = "uk-input uk-width-auto", placeholder = "Поиск" } })
-            </div>
-            <button id="btn-find" class="uk-button uk-button-primary uk-padding-remove-top uk-padding-remove-bottom uk-padding-small"><span uk-icon="icon: search"></span></button>
+<nav class="uk-margin uk-navbar-container-default" uk-navbar>
+
+    <div class="uk-navbar-left">
+        <div class="uk-button-group uk-child-width-auto">
+            <button id="btn-add" class="uk-button uk-button-small uk-button-default">Добавить</button>
+            <button id="btn-view" class="uk-button uk-button-small uk-button-default">Просмотр</button>
+            <button id="btn-edit" class="uk-button uk-button-small uk-button-default">Изменить</button>
+            <button id="btn-delete" class="uk-button uk-button-small uk-button-default">Удалить</button>
+        </div>
+    </div>
+
+    <div class="uk-navbar-right">
+        <div class="uk-inline">
+            <a id="btn-find" class="uk-form-icon uk-form-icon-flip" href="#" uk-icon="icon: search"></a>
             @if (!string.IsNullOrEmpty(Request.QueryString["search"]))
             {
-                <button id="btn-find-cancel" class="uk-button uk-button-danger uk-padding-remove-top uk-padding-remove-bottom uk-padding-small"><span uk-icon="icon: close"></span></button>
+                <a id="btn-find-cancel" class="uk-form-icon" href="#" uk-icon="icon: close"></a>
             }
+            @Html.EditorFor(model => model.PageInfo.Search, new { htmlAttributes = new { id = "toolbar-search", @class = "uk-input uk-form-small", placeholder = "Поиск" } })
         </div>
-    </nav>
-</div>
+    </div>
+
+</nav>
 
 @if (Model.PageInfo.TotalItems > 0)
 {
@@ -35,7 +38,7 @@
     var f_2 = (Model.PageInfo.Sort_filter == "kpp") ? Model.PageInfo.Sort_order : "";
     var f_3 = (Model.PageInfo.Sort_filter == "name") ? Model.PageInfo.Sort_order : "";
 
-    <div uk-height-viewport="expand: true">
+    <div class="uk-box-shadow-small">
         <table class="uk-table uk-table-divider uk-table-hover uk-table-small uk-table-striped">
             <thead>
                 <tr>
@@ -105,22 +108,24 @@ else
     @Html._ErrorNoData()
 }
 
+<div id="viewform-modal-overflow" class="uk-flex-top" uk-modal>
+    <div class="uk-modal-dialog uk-width-4-5 uk-margin-auto-vertical">
+        <button class="uk-modal-close-full" type="button" uk-close></button>
+        <div class="uk-modal-body" id="viewform-modal-overflow-data" uk-overflow-auto></div>
+    </div>
+</div>
+
 <script type="text/javascript">
 
     var currentItem = @f_item;
     var currentActive = true;
 
-    $(document).ready(function () {
+    function searchRedirect() {
+        url = '@Url.Action("Index", "Enterprises", new { area = "Guides" })?page=@Model.PageInfo.CurrentPage' + '&search=' + $('#toolbar-search').val() + '&sort_order=@Model.PageInfo.Sort_order' + '&sort_filter=@Model.PageInfo.Sort_filter'
+        location.href = url
+    }
 
-        $('#toolbar-search').keyup(function () {
-            if ($(this).val().length > 0) {
-                $('#btn-find').removeClass('uk-disabled').removeClass('uk-button-default').addClass('uk-button-primary')
-                $('#btn-find-cancel').removeClass('uk-disabled').removeClass('uk-button-default').addClass('uk-button-danger')
-            } else {
-                $('#btn-find').addClass('uk-disabled').removeClass('uk-button-primary').addClass('uk-button-default')
-                $('#btn-find-cancel').addClass('uk-disabled').removeClass('uk-button-danger').addClass('uk-button-default')
-            }
-        });
+    $(document).ready(function () {
 
         $('table > thead > tr > th').on('click', function (e) {
             currentSortField = $(this).data('field')
@@ -137,19 +142,18 @@ else
         $('table > tbody > tr > td').on('click', function (e) {
             currentActive = !$(this).parent('tr').hasClass('uk-active')
             $('table > tbody > tr').removeClass('uk-active')
-
             if (currentActive) {
                 currentItem = $(this).parent('tr').data('id')
-                $('#btn-view').removeClass('uk-disabled').removeClass('uk-button-default').addClass('uk-button-primary')
-                $('#btn-edit').removeClass('uk-disabled').removeClass('uk-button-default').addClass('uk-button-primary')
-                $('#btn-delete').removeClass('uk-disabled').removeClass('uk-button-default').addClass('uk-button-danger')
+                $('#btn-view').removeClass('uk-disabled').removeClass('uk-background-muted')
+                $('#btn-edit').removeClass('uk-disabled').removeClass('uk-background-muted')
+                $('#btn-delete').removeClass('uk-disabled').removeClass('uk-background-muted')
                 $(this).parent('tr').addClass('uk-active')
             }
             else {
                 currentItem = 0;
-                $('#btn-view').addClass('uk-disabled').removeClass('uk-button-primary').addClass('uk-button-default')
-                $('#btn-edit').addClass('uk-disabled').removeClass('uk-button-primary').addClass('uk-button-default')
-                $('#btn-delete').addClass('uk-disabled').removeClass('uk-button-danger').addClass('uk-button-default')
+                $('#btn-view').addClass('uk-disabled').addClass('uk-background-muted')
+                $('#btn-edit').addClass('uk-disabled').addClass('uk-background-muted')
+                $('#btn-delete').addClass('uk-disabled').addClass('uk-background-muted')
             }
         });
 
@@ -159,8 +163,14 @@ else
         });
 
         $('#btn-view').on('click', function (e) {
-            url = '@Url.Action("Details", "Enterprises", new { area = "Guides" })/' + currentItem
-            location.href = url
+            $('#viewform-modal-overflow-data').empty().append('<div class="uk-position-center" uk-spinner>Загрузка</div>')
+            UIkit.modal("#viewform-modal-overflow").show()
+            $.ajax({
+                url: '@Url.Action("Details", "Enterprises", new { area = "Guides" })/' + currentItem,
+                context: document.body
+            }).done(function (data) {
+                $('#viewform-modal-overflow-data').empty().append(data)
+            })
         });
 
         $('#btn-edit').on('click', function (e) {
@@ -176,13 +186,17 @@ else
         });
 
         $('#btn-find').on('click', function (e) {
-            url = '@Url.Action("Index", "Enterprises", new { area = "Guides" })?page=@Model.PageInfo.CurrentPage' + '&search=' + $('#toolbar-search').val() + '&sort_order=@Model.PageInfo.Sort_order' + '&sort_filter=@Model.PageInfo.Sort_filter'
-            location.href = url
+            searchText = $('#toolbar-search').val();
+            if (searchText.length > 0) {
+                searchRedirect()
+            } else {
+                $('#toolbar-search').addClass('uk-form-danger')
+            }
         });
 
         $('#btn-find-cancel').on('click', function (e) {
             $('#toolbar-search').val(null);
-            $('#btn-find').click();
+            searchRedirect()
         });
     });
 

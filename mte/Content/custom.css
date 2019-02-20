@@ -34,3 +34,15 @@ h4, .uk-h4, h5, .uk-h5, h6, .uk-h6 {
 .uk-table-hover {
     cursor: pointer !important;
 }
+
+.uk-table {
+    border: 1px solid #e5e5e5;
+}
+
+.uk-table th {
+    font-size: 0.9rem !important;
+}
+
+.uk-form-small {
+    font-size: 1rem !important;
+}
