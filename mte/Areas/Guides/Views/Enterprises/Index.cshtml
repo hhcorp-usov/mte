@@ -3,19 +3,22 @@
 
 @model EnterprisesView
 
+@Scripts.Render("~/bundles/jqueryval")
+
 @{
     var f_item = Model.Enterprises.Count() > 0 ? Model.Enterprises.First().Id : 0;
+    var f_1 = (Model.PageInfo.Sort_filter == "inn") ? Model.PageInfo.Sort_order : "";
+    var f_2 = (Model.PageInfo.Sort_filter == "kpp") ? Model.PageInfo.Sort_order : "";
+    var f_3 = (Model.PageInfo.Sort_filter == "name") ? Model.PageInfo.Sort_order : "";
 }
 
-
 <nav class="uk-margin uk-navbar-container-default" uk-navbar>
-
     <div class="uk-navbar-left">
         <div class="uk-button-group uk-child-width-auto">
-            <button id="btn-add" class="uk-button uk-button-small uk-button-default">Добавить</button>
-            <button id="btn-view" class="uk-button uk-button-small uk-button-default">Просмотр</button>
-            <button id="btn-edit" class="uk-button uk-button-small uk-button-default">Изменить</button>
-            <button id="btn-delete" class="uk-button uk-button-small uk-button-default">Удалить</button>
+            <button id="btn-add" class="uk-button uk-button-default">Добавить</button>
+            <button id="btn-view" class="uk-button uk-button-default">Просмотр</button>
+            <button id="btn-edit" class="uk-button uk-button-default">Изменить</button>
+            <button id="btn-delete" class="uk-button uk-button-default">Удалить</button>
         </div>
     </div>
 
@@ -26,87 +29,89 @@
             {
                 <a id="btn-find-cancel" class="uk-form-icon" href="#" uk-icon="icon: close"></a>
             }
-            @Html.EditorFor(model => model.PageInfo.Search, new { htmlAttributes = new { id = "toolbar-search", @class = "uk-input uk-form-small", placeholder = "Поиск" } })
+            @Html.EditorFor(model => model.PageInfo.Search, new { htmlAttributes = new { id = "toolbar-search", @class = "uk-input", placeholder = "Поиск" } })
         </div>
     </div>
-
 </nav>
 
-@if (Model.PageInfo.TotalItems > 0)
-{
-    var f_1 = (Model.PageInfo.Sort_filter == "inn") ? Model.PageInfo.Sort_order : "";
-    var f_2 = (Model.PageInfo.Sort_filter == "kpp") ? Model.PageInfo.Sort_order : "";
-    var f_3 = (Model.PageInfo.Sort_filter == "name") ? Model.PageInfo.Sort_order : "";
-
-    <div class="uk-box-shadow-small">
-        <table class="uk-table uk-table-divider uk-table-hover uk-table-small uk-table-striped">
-            <thead>
-                <tr>
-                    <th class="uk-table-shrink uk-text-middle" data-field="inn" data-sort="@f_1">
-                        @Html.DisplayNameFor(model => model.ModelInfo.Inn)
-                        @switch (f_1)
-                        {
-                            case "asc":
-                                <span uk-icon="icon: triangle-up; ratio: 1"></span>
-                                break;
-                            case "desc":
-                                <span uk-icon="icon: triangle-down; ratio: 1"></span>
-                                break;
-                        }
-                    </th>
-                    <th class="uk-table-shrink uk-text-middle" data-field="kpp" data-sort="@f_2">
-                        @Html.DisplayNameFor(model => model.ModelInfo.Kpp)
-                        @switch (f_2)
-                        {
-                            case "asc":
-                                <span uk-icon="icon: triangle-up; ratio: 1"></span>
-                                break;
-                            case "desc":
-                                <span uk-icon="icon: triangle-down; ratio: 1"></span>
-                                break;
-                        }
-                    </th>
-                    <th class="uk-table-expand uk-text-middle" data-field="name" data-sort="@f_3">
-                        @Html.DisplayNameFor(model => model.ModelInfo.Name)
-                        @switch (f_3)
-                        {
-                            case "asc":
-                                <span uk-icon="icon: triangle-up; ratio: 1"></span>
-                                break;
-                            case "desc":
-                                <span uk-icon="icon: triangle-down; ratio: 1"></span>
-                                break;
-                        }
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model.Enterprises)
+<table class="uk-table uk-table-divider uk-table-hover uk-table-small uk-table-striped uk-table-border uk-margin-remove-bottom">
+    <thead>
+        <tr>
+            <th class="uk-table-shrink uk-text-middle uk-width-small" data-field="inn" data-sort="@f_1">
+                @Html.DisplayNameFor(model => model.ModelInfo.Inn)
+                @switch (f_1)
                 {
-                    var is_active = (item.Id == f_item) ? "uk-active" : "";
-
-                    <tr data-id="@item.Id" class="@is_active">
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Inn)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Kpp)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Name)
-                        </td>
-                    </tr>
+                    case "asc":
+                        <span uk-icon="icon: triangle-up; ratio: 1"></span>
+                        break;
+                    case "desc":
+                        <span uk-icon="icon: triangle-down; ratio: 1"></span>
+                        break;
                 }
-            </tbody>
-        </table>
-    </div>
+            </th>
+            <th class="uk-table-shrink uk-text-middle uk-width-small" data-field="kpp" data-sort="@f_2">
+                @Html.DisplayNameFor(model => model.ModelInfo.Kpp)
+                @switch (f_2)
+                {
+                    case "asc":
+                        <span uk-icon="icon: triangle-up; ratio: 1"></span>
+                        break;
+                    case "desc":
+                        <span uk-icon="icon: triangle-down; ratio: 1"></span>
+                        break;
+                }
+            </th>
+            <th class="uk-table-expand uk-text-middle" data-field="name" data-sort="@f_3">
+                @Html.DisplayNameFor(model => model.ModelInfo.Name)
+                @switch (f_3)
+                {
+                    case "asc":
+                        <span uk-icon="icon: triangle-up; ratio: 1"></span>
+                        break;
+                    case "desc":
+                        <span uk-icon="icon: triangle-down; ratio: 1"></span>
+                        break;
+                }
+            </th>
+        </tr>
+    </thead>
+</table>
 
-    @Html.PageLinks(Model.PageInfo, x => Url.Action("Index", new { page = x, search = Model.PageInfo.Search, sort_order = Model.PageInfo.Sort_order, sort_filter = Model.PageInfo.Sort_filter }))
-}
-else
-{
-    @Html._ErrorNoData()
-}
+<div uk-height-viewport="offset-top: true; offset-bottom: 70px;" class="uk-height-medium">
+    <div class="js-wrapper">
+        <div uk-overflow-auto="selContainer: .uk-height-medium; selContent: .js-wrapper">
+            @if (Model.PageInfo.TotalItems > 0)
+            {
+                <table class="uk-table uk-table-divider uk-table-hover uk-table-small uk-table-striped uk-table-border">
+                    <tbody>
+                        @foreach (var item in Model.Enterprises)
+                        {
+                            var is_active = (item.Id == f_item) ? "uk-active" : "";
+
+                            <tr data-id="@item.Id" class="@is_active">
+                                <td class="uk-width-small">
+                                    @Html.DisplayFor(modelItem => item.Inn)
+                                </td>
+                                <td class="uk-width-small">
+                                    @Html.DisplayFor(modelItem => item.Kpp)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Name)
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+                @Html.PageLinks(Model.PageInfo, x => Url.Action("Index", new { page = x, search = Model.PageInfo.Search, sort_order = Model.PageInfo.Sort_order, sort_filter = Model.PageInfo.Sort_filter }))
+            }
+            else
+            {
+                @Html._ErrorNoData()
+            }
+        </div>
+    </div>
+</div>
 
 <div id="viewform-modal-overflow" class="uk-flex-top" uk-modal>
     <div class="uk-modal-dialog uk-width-4-5 uk-margin-auto-vertical">
@@ -158,12 +163,18 @@ else
         });
 
         $('#btn-add').on('click', function (e) {
-            url = '@Url.Action("Create", "Enterprises", new { area = "Guides" })'
-            location.href = url
+            $('#viewform-modal-overflow-data').empty().append('<div class="uk-position-center" uk-spinner>Загрузка<span class="uk-margin-left"></span></div>')
+            UIkit.modal("#viewform-modal-overflow").show()
+            $.ajax({
+                url: '@Url.Action("Create", "Enterprises", new { area = "Guides" })',
+                context: document.body
+            }).done(function (data) {
+                $('#viewform-modal-overflow-data').empty().append(data)
+            })
         });
 
         $('#btn-view').on('click', function (e) {
-            $('#viewform-modal-overflow-data').empty().append('<div class="uk-position-center" uk-spinner>Загрузка</div>')
+            $('#viewform-modal-overflow-data').empty().append('<div class="uk-position-center" uk-spinner>Загрузка<span class="uk-margin-left"></span></div>')
             UIkit.modal("#viewform-modal-overflow").show()
             $.ajax({
                 url: '@Url.Action("Details", "Enterprises", new { area = "Guides" })/' + currentItem,
@@ -195,7 +206,7 @@ else
         });
 
         $('#btn-find-cancel').on('click', function (e) {
-            $('#toolbar-search').val(null);
+            $('#toolbar-search').val(null)
             searchRedirect()
         });
     });

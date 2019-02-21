@@ -15,25 +15,34 @@ namespace mte.Areas.Guides.Controllers
         private ApplicationDbContext dbu = new ApplicationDbContext();
         private BaseSettings bs = new BaseSettings();
 
+        public int GetUserIdentity()
+        {
+            var uid = User.Identity.GetUserId();
+            ApplicationUser u = dbu.Users.FirstOrDefault(x => x.Id == uid);
+            return u.AdditionalUserInfo.GlobalContainersId;
+        }
 
-        // GET: Guides/Enterprises
+        [Authorize]
         public async Task<ActionResult> Index(int page = 1, string search = null, string sort_filter = null, string sort_order = null)
         {
             ViewBag.PageTitle = "Справочники / Организации";
 
             var list_count = 0;
             var list = from b in db.Enterprises select b;
-
-            var uid = User.Identity.GetUserId();
-            ApplicationUser u = dbu.Users.FirstOrDefault(x => x.Id == uid);
+            int cguid = GetUserIdentity();
 
             sort_filter = string.IsNullOrEmpty(sort_filter) ? "inn" : sort_filter;
             sort_order = string.IsNullOrEmpty(sort_order) ? "asc" : sort_order;
 
-            list = list.Where(w => w._deleted != true).Where(w => w.GlobalContainersId == u.AdditionalUserInfo.GlobalContainersId);
+            list = list.Where(w => w._deleted != true).Where(w => w.GlobalContainersId == cguid);
+
             if (!string.IsNullOrEmpty(search))
             {
-                list = list.Where(w => w.Inn.ToUpper().Contains(search.ToUpper()) || w.Kpp.ToUpper().Contains(search.ToUpper()) || w.Name.ToUpper().Contains(search.ToUpper()));
+                list = list.Where(
+                    w => w.Inn.ToUpper().Contains(search.ToUpper()) ||
+                    w.Kpp.ToUpper().Contains(search.ToUpper()) ||
+                    w.Name.ToUpper().Contains(search.ToUpper())
+                    );
             }
 
             switch (sort_filter.ToLower())
@@ -98,45 +107,40 @@ namespace mte.Areas.Guides.Controllers
             return View(model);
         }
 
-        // GET: Guides/Enterprises/Details/5
+        [Authorize]
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-
-            var uid = User.Identity.GetUserId();
-            ApplicationUser u = dbu.Users.FirstOrDefault(x => x.Id == uid);
-            Enterprises enterprises = await db.Enterprises.Where(w => w.GlobalContainersId == u.AdditionalUserInfo.GlobalContainersId).Where(v=>v.Id == id).FirstAsync();
-
+            int cguid = GetUserIdentity();
+            Enterprises enterprises = await db.Enterprises
+                .Where(w => w.GlobalContainersId == cguid)
+                .Where(w => w.Id == id)
+                .FirstAsync();
             if (enterprises == null)
             {
                 return HttpNotFound();
             }
-
             return PartialView(enterprises);
         }
 
-        // GET: Guides/Enterprises/Create
+        [Authorize]
         public ActionResult Create()
         {
-            return View();
+            return PartialView();
         }
 
-        // POST: Guides/Enterprises/Create
-        // Чтобы защититься от атак чрезмерной передачи данных, включите определенные свойства, для которых следует установить привязку. Дополнительные 
-        // сведения см. в статье https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind(Include = "Id,Name,Inn,Kpp,Ogrn,FAdress,YAdress,Phones")] Enterprises enterprises)
         {
             if (ModelState.IsValid)
             {
-                var uid = User.Identity.GetUserId();
-                ApplicationUser u = dbu.Users.FirstOrDefault(x => x.Id == uid);
-                enterprises.GlobalContainersId = u.AdditionalUserInfo.GlobalContainersId;
-
+                int cguid = GetUserIdentity();
+                enterprises.GlobalContainersId = cguid;
                 db.Enterprises.Add(enterprises);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
@@ -152,7 +156,8 @@ namespace mte.Areas.Guides.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Enterprises enterprises = await db.Enterprises.FindAsync(id);
+            int cguid = GetUserIdentity();
+            Enterprises enterprises = await db.Enterprises.Where(w => w.GlobalContainersId == cguid || w.Id == id).FirstAsync();
             if (enterprises == null)
             {
                 return HttpNotFound();
@@ -169,10 +174,8 @@ namespace mte.Areas.Guides.Controllers
         {
             if (ModelState.IsValid)
             {
-                var uid = User.Identity.GetUserId();
-                ApplicationUser u = dbu.Users.FirstOrDefault(x => x.Id == uid);
-                enterprises.GlobalContainersId = u.AdditionalUserInfo.GlobalContainersId;
-
+                int cguid = GetUserIdentity();
+                enterprises.GlobalContainersId = cguid;
                 db.Entry(enterprises).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
@@ -187,7 +190,8 @@ namespace mte.Areas.Guides.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Enterprises enterprises = await db.Enterprises.FindAsync(id);
+            int cguid = GetUserIdentity();
+            Enterprises enterprises = await db.Enterprises.Where(w => w.GlobalContainersId == cguid || w.Id == id).FirstAsync();
             if (enterprises == null)
             {
                 return HttpNotFound();
@@ -200,7 +204,8 @@ namespace mte.Areas.Guides.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            Enterprises enterprises = await db.Enterprises.FindAsync(id);
+            int cguid = GetUserIdentity();
+            Enterprises enterprises = await db.Enterprises.Where(w => w.GlobalContainersId == cguid || w.Id == id).FirstAsync();
             enterprises._deleted = true;
             db.Entry(enterprises).State = EntityState.Modified;
             await db.SaveChangesAsync();

@@ -2,41 +2,33 @@
 
 <h3 class="uk-heading-bullet uk-margin-medium-bottom">Просмотр организации</h3>
 
-<div class="uk-child-width-1-1 uk-grid-small" uk-grid>
-    <div>
-        <div uk-grid>
-            <div class="uk-width-1-5">@Html.DisplayNameFor(model => model.Name)</div>
-            <div>@Html.DisplayFor(model => model.Name)</div>
-        </div>
+<form class="uk-form-horizontal">
+    <div class="uk-margin-small">
+        @Html.LabelFor(model => model.Name, new { @class = "uk-form-label" })
+        <div class="uk-form-controls">@Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "uk-input uk-disabled" } })</div>
     </div>
-    <div>
-        <div uk-grid>
-            <div class="uk-width-1-5">@Html.DisplayNameFor(model => model.Inn) / @Html.DisplayNameFor(model => model.Kpp)</div>
-            <div>@Html.DisplayFor(model => model.Inn) / @Html.DisplayFor(model => model.Kpp)</div>
-        </div>
+    <div class="uk-margin-small">
+        @Html.LabelFor(model => model.Inn, new { @class = "uk-form-label" })
+        <div class="uk-form-controls">@Html.EditorFor(model => model.Inn, new { htmlAttributes = new { @class = "uk-input uk-disabled" } })</div>
     </div>
-    <div>
-        <div uk-grid>
-            <div class="uk-width-1-5">@Html.DisplayNameFor(model => model.Ogrn)</div>
-            <div>@Html.DisplayFor(model => model.Ogrn)</div>
-        </div>
+    <div class="uk-margin-small">
+        @Html.LabelFor(model => model.Kpp, new { @class = "uk-form-label" })
+        <div class="uk-form-controls">@Html.EditorFor(model => model.Kpp, new { htmlAttributes = new { @class = "uk-input uk-disabled" } })</div>
     </div>
-    <div>
-        <div uk-grid>
-            <div class="uk-width-1-5">@Html.DisplayNameFor(model => model.YAdress)</div>
-            <div>@Html.DisplayFor(model => model.YAdress)</div>
-        </div>
+    <div class="uk-margin-small">
+        @Html.LabelFor(model => model.Ogrn, new { @class = "uk-form-label" })
+        <div class="uk-form-controls">@Html.EditorFor(model => model.Ogrn, new { htmlAttributes = new { @class = "uk-input uk-disabled" } })</div>
     </div>
-    <div>
-        <div uk-grid>
-            <div class="uk-width-1-5">@Html.DisplayNameFor(model => model.FAdress)</div>
-            <div>@Html.DisplayFor(model => model.FAdress)</div>
-        </div>
+    <div class="uk-margin-small">
+        @Html.LabelFor(model => model.YAdress, new { @class = "uk-form-label" })
+        <div class="uk-form-controls">@Html.EditorFor(model => model.YAdress, new { htmlAttributes = new { @class = "uk-input uk-disabled" } })</div>
     </div>
-    <div>
-        <div uk-grid>
-            <div class="uk-width-1-5">@Html.DisplayNameFor(model => model.Phones)</div>
-            <div>@Html.DisplayFor(model => model.Phones)</div>
-        </div>
+    <div class="uk-margin-small">
+        @Html.LabelFor(model => model.FAdress, new { @class = "uk-form-label" })
+        <div class="uk-form-controls">@Html.EditorFor(model => model.FAdress, new { htmlAttributes = new { @class = "uk-input uk-disabled" } })</div>
     </div>
-</div>
+    <div class="uk-margin-small">
+        @Html.LabelFor(model => model.Phones, new { @class = "uk-form-label" })
+        <div class="uk-form-controls">@Html.EditorFor(model => model.Phones, new { htmlAttributes = new { @class = "uk-input uk-disabled" } })</div>
+    </div>
+</form>

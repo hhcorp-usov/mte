@@ -35,8 +35,34 @@ h4, .uk-h4, h5, .uk-h5, h6, .uk-h6 {
     cursor: pointer !important;
 }
 
-.uk-table {
+.uk-table-border {
     border: 1px solid #e5e5e5;
+}
+
+.uk-table-border-top {
+    border-top: 1px solid #e5e5e5;
+}
+
+.uk-table-border-bottom {
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.uk-table-border-left {
+    border-left: 1px solid #e5e5e5;
+}
+
+.uk-table-border-right {
+    border-right: 1px solid #e5e5e5;
+}
+
+.uk-table-border-horizontal {
+    border-left: 1px solid #e5e5e5;
+    border-right: 1px solid #e5e5e5;
+}
+
+.uk-table-border-vertical {
+    border-top: 1px solid #e5e5e5;
+    border-bottom: 1px solid #e5e5e5;
 }
 
 .uk-table th {
@@ -45,4 +71,10 @@ h4, .uk-h4, h5, .uk-h5, h6, .uk-h6 {
 
 .uk-form-small {
     font-size: 1rem !important;
+}
+
+.uk-form-label {
+    font-size: 0.9rem !important;
+    text-transform: uppercase;
+    cursor: pointer;
 }

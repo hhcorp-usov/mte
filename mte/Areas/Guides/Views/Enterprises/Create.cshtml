@@ -1,83 +1,84 @@
 ﻿@model mte.Models.Enterprises
 
-<h2>Create</h2>
+<h3 class="uk-heading-bullet uk-margin-medium-bottom">Создание</h3>
 
-@Scripts.Render("~/bundles/jqueryval")
-
-@using (Html.BeginForm())
+@using (Html.BeginForm("Create", "Enterprises", new { area = "Guides" }, FormMethod.Post, new { @class = "uk-form-horizontal", @id="createForm" }))
 {
     @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
-        <h4>Enterprises</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
-            </div>
-        </div>
+    @Html.ValidationSummary(true, "", new { @class = "uk-form-label" })
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Inn, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Inn, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Inn, "", new { @class = "text-danger" })
-            </div>
+    <div class="uk-margin-small">
+        @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "uk-form-label" })
+        <div class="uk-form-controls">
+            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "uk-input" } })
+            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "uk-form-label" })
         </div>
+    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Kpp, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Kpp, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Kpp, "", new { @class = "text-danger" })
-            </div>
+    <div class="uk-margin-small">
+        @Html.LabelFor(model => model.Inn, htmlAttributes: new { @class = "uk-form-label" })
+        <div class="uk-form-controls">
+            @Html.EditorFor(model => model.Inn, new { htmlAttributes = new { @class = "uk-input" } })
+            @Html.ValidationMessageFor(model => model.Inn, "", new { @class = "uk-form-label" })
         </div>
+    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Ogrn, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Ogrn, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Ogrn, "", new { @class = "text-danger" })
-            </div>
+    <div class="uk-margin-small">
+        @Html.LabelFor(model => model.Kpp, htmlAttributes: new { @class = "uk-form-label" })
+        <div class="uk-form-controls">
+            @Html.EditorFor(model => model.Kpp, new { htmlAttributes = new { @class = "uk-input" } })
+            @Html.ValidationMessageFor(model => model.Kpp, "", new { @class = "uk-form-label" })
         </div>
+    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.FAdress, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.FAdress, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.FAdress, "", new { @class = "text-danger" })
-            </div>
+    <div class="uk-margin-small">
+        @Html.LabelFor(model => model.Ogrn, htmlAttributes: new { @class = "uk-form-label" })
+        <div class="uk-form-controls">
+            @Html.EditorFor(model => model.Ogrn, new { htmlAttributes = new { @class = "uk-input" } })
+            @Html.ValidationMessageFor(model => model.Ogrn, "", new { @class = "uk-form-label" })
         </div>
+    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.YAdress, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.YAdress, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.YAdress, "", new { @class = "text-danger" })
-            </div>
+    <div class="uk-margin-small">
+        @Html.LabelFor(model => model.FAdress, htmlAttributes: new { @class = "uk-form-label" })
+        <div class="uk-form-controls">
+            @Html.EditorFor(model => model.FAdress, new { htmlAttributes = new { @class = "uk-input" } })
+            @Html.ValidationMessageFor(model => model.FAdress, "", new { @class = "uk-form-label" })
         </div>
+    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model._deleted, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model._deleted)
-                    @Html.ValidationMessageFor(model => model._deleted, "", new { @class = "text-danger" })
-                </div>
-            </div>
+    <div class="uk-margin-small">
+        @Html.LabelFor(model => model.YAdress, htmlAttributes: new { @class = "uk-form-label" })
+        <div class="uk-form-controls">
+            @Html.EditorFor(model => model.YAdress, new { htmlAttributes = new { @class = "uk-input" } })
+            @Html.ValidationMessageFor(model => model.YAdress, "", new { @class = "uk-form-label" })
         </div>
+    </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
+    <div class="uk-margin-small">
+        @Html.LabelFor(model => model.Phones, htmlAttributes: new { @class = "uk-form-label" })
+        <div class="uk-form-controls">
+            @Html.EditorFor(model => model.Phones, new { htmlAttributes = new { @class = "uk-input" } })
+            @Html.ValidationMessageFor(model => model.Phones, "", new { @class = "uk-form-label" })
         </div>
     </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
+<div class="uk-margin-small">
+    <button id="btn-submit" class="uk-button uk-button-primary">Создать</button>
 </div>
+
+<script type="text/javascript">
+
+    $('#btn-submit').on('click', function (e) {
+        $.ajax({
+            url: '@Url.Action("Create", "Enterprises", new { area = "Guides" })',
+            type: 'POST',
+            data: $('#createForm')
+        }).done(function (data) {
+            UIkit.modal("#viewform-modal-overflow").hide()
+        })
+    });
+
+</script>
