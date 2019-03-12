@@ -1,45 +1,86 @@
-﻿@model IEnumerable<mte.Models.Smenes>
+﻿@using mte.Models
+@using mte.Helpers
 
-@{
-    ViewBag.Title = "Index";
+@model SmenesView
+
+@using (Ajax.BeginForm("GetDataList", new { },
+    new AjaxOptions
+    {
+        UpdateTargetId = "result",
+        OnBegin = "OnBegin",
+        OnFailure = "OnFailure",
+        OnSuccess = "OnSuccess",
+        OnComplete = "OnComplete"
+    },
+    new { @id = "frm_index" }))
+{
+    <nav class="uk-margin uk-navbar-container-default" uk-navbar>
+        <div class="uk-navbar-left">
+            <select class="uk-select">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+            </select>
+            <select class="uk-select">
+                <option>Январь</option>
+                <option>Февраль</option>
+                <option>Март</option>
+                <option>Апрель</option>
+                <option>Май</option>
+                <option>Июнь</option>
+            </select>
+            <select class="uk-select">
+                <option>2014</option>
+                <option>2015</option>
+                <option>2016</option>
+                <option>2017</option>
+                <option>2018</option>
+                <option>2019</option>
+            </select>
+        </div>
+
+        <div class="uk-navbar-right">
+            <div class="uk-inline">
+                <a id="btn-find" class="uk-form-icon uk-form-icon-flip" href="#" uk-icon="icon: search"></a>
+                @if (!string.IsNullOrEmpty(Request.QueryString["search"]))
+                {
+                    <a id="btn-find-cancel" class="uk-form-icon" href="#" uk-icon="icon: close"></a>
+                }
+                @Html.EditorFor(model => model.PageInfo.Search, new { htmlAttributes = new { id = "toolbar-search", @class = "uk-input", placeholder = "Поиск" } })
+            </div>
+        </div>
+    </nav>
 }
 
-<h2>Index</h2>
+<div id="result"></div>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.ControlerEmployers.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DispEmployers.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SmenaDate)
-        </th>
-        <th></th>
-    </tr>
+<div id="beginSpinner">
+    <div uk-spinner></div>
+    <span>&nbsp;Загрузка...</span>
+</div>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.ControlerEmployers.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DispEmployers.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SmenaDate)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+<script type="text/javascript">
 
-</table>
+    function OnBegin() {
+        $('#result').empty()
+        $('#beginSpinner').show()
+    }
+
+    function OnSuccess(data) {
+    }
+
+    function OnFailure(request, error) {
+    }
+
+    function OnComplete(request, status) {
+        $('#beginSpinner').hide()
+    }
+
+    $(document).ready(function () {
+        $('#frm_index').submit()
+    });
+
+</script>

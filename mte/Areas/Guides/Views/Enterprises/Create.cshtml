@@ -2,8 +2,8 @@
 
 <h3 class="uk-heading-bullet uk-margin-medium-bottom">Создание</h3>
 
-@using (Html.BeginForm("Create", "Enterprises", new { area = "Guides" }, FormMethod.Post, new { @class = "uk-form-horizontal", @id="createForm" }))
-{
+<form method="POST" id="createformx" action="javascript:void(null)" onsubmit="sendpostdata()" class="uk-form-horizontal">
+
     @Html.AntiForgeryToken()
 
     @Html.ValidationSummary(true, "", new { @class = "uk-form-label" })
@@ -63,22 +63,31 @@
             @Html.ValidationMessageFor(model => model.Phones, "", new { @class = "uk-form-label" })
         </div>
     </div>
-}
 
-<div class="uk-margin-small">
-    <button id="btn-submit" class="uk-button uk-button-primary">Создать</button>
-</div>
+    <div class="uk-margin-small">
+        <input class="uk-button uk-button-primary" value="Создать" type="submit">
+    </div>
+
+</form>
 
 <script type="text/javascript">
 
-    $('#btn-submit').on('click', function (e) {
+    function sendpostdata() {
+        var msg = $('#createformx').serialize()
         $.ajax({
-            url: '@Url.Action("Create", "Enterprises", new { area = "Guides" })',
             type: 'POST',
-            data: $('#createForm')
-        }).done(function (data) {
-            UIkit.modal("#viewform-modal-overflow").hide()
+            url: '@Url.Action("Create", "Enterprises", new { area = "Guides" })',
+            data: msg,
+            success: function (data) {
+                UIkit.modal("#viewform-modal-overflow").hide()
+            },
+            error: function (xhr, str) {
+                alert('Возникла ошибка: ' + xhr.responseCode)
+            },
+            complete: function () {
+
+            }
         })
-    });
+    }
 
 </script>

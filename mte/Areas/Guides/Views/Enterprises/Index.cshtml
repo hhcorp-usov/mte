@@ -4,6 +4,7 @@
 @model EnterprisesView
 
 @Scripts.Render("~/bundles/jqueryval")
+@Scripts.Render("~/bundles/jqueryajax")
 
 @{
     var f_item = Model.Enterprises.Count() > 0 ? Model.Enterprises.First().Id : 0;
@@ -11,6 +12,20 @@
     var f_2 = (Model.PageInfo.Sort_filter == "kpp") ? Model.PageInfo.Sort_order : "";
     var f_3 = (Model.PageInfo.Sort_filter == "name") ? Model.PageInfo.Sort_order : "";
 }
+
+<script type="text/javascript">
+    function OnSuccess(data) {
+        UIkit.modal("#viewform-modal-overflow").show()
+    }
+</script>
+
+@using (Ajax.BeginForm("Index", new AjaxOptions { UpdateTargetId = "viewform-modal-overflow-data", OnSuccess = "OnSuccess" }))
+{
+    <input type="text" name="name" />
+    <input type="submit" value="Поиск" />
+}
+
+
 
 <nav class="uk-margin uk-navbar-container-default" uk-navbar>
     <div class="uk-navbar-left">
@@ -120,6 +135,8 @@
     </div>
 </div>
 
+<div class="uk-position-center" id="viewform-progress" uk-overflow-auto></div>
+
 <script type="text/javascript">
 
     var currentItem = @f_item;
@@ -160,6 +177,17 @@
                 $('#btn-edit').addClass('uk-disabled').addClass('uk-background-muted')
                 $('#btn-delete').addClass('uk-disabled').addClass('uk-background-muted')
             }
+        }).on('dblclick', function (e) {
+            currentActive = !$(this).parent('tr').hasClass('uk-active')
+            $('table > tbody > tr').removeClass('uk-active')
+
+            currentItem = $(this).parent('tr').data('id')
+            $('#btn-view').removeClass('uk-disabled').removeClass('uk-background-muted')
+            $('#btn-edit').removeClass('uk-disabled').removeClass('uk-background-muted')
+            $('#btn-delete').removeClass('uk-disabled').removeClass('uk-background-muted')
+            $(this).parent('tr').addClass('uk-active')
+
+            $('#btn-view').click();
         });
 
         $('#btn-add').on('click', function (e) {

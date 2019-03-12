@@ -78,3 +78,33 @@ h4, .uk-h4, h5, .uk-h5, h6, .uk-h6 {
     text-transform: uppercase;
     cursor: pointer;
 }
+
+/* Child width */
+
+.uk-child-width-1-7 > * {
+    width: calc(100% * 1 / 7.001) !important;
+}
+
+@media (min-width: 640px) {
+    .uk-child-width-1-7\@s > * {
+        width: calc(100% * 1 / 7.001) !important;
+    }
+}
+
+@media (min-width: 960px) {
+    .uk-child-width-1-7\@m > * {
+        width: calc(100% * 1 / 7.001) !important;
+    }
+}
+
+@media (min-width: 1200px) {
+    .uk-child-width-1-7\@l > * {
+        width: calc(100% * 1 / 7.001) !important;
+    }
+}
+
+@media (min-width: 1600px) {
+    .uk-child-width-1-7\@xl > * {
+        width: calc(100% * 1 / 7.001) !important;
+    }
+}

@@ -27,13 +27,6 @@
         public string Sort_order { get; set; }
     }
 
-    public partial class EnterprisesView
-    {
-        public IEnumerable<Enterprises> Enterprises { get; set; }
-        public Enterprises ModelInfo { get; set; }
-        public PagingInfo PageInfo { get; set; }
-    }
-
     public partial class GlobalContainers
     {
         [Key]
@@ -363,6 +356,15 @@
 
         public virtual Employers DispEmployers { get; set; }
         public virtual Employers ControlerEmployers { get; set; }
+
+        public string GetCName()
+        {
+            return ControlerEmployers.FirstName.Trim() + ' ' + ControlerEmployers.Name.Trim() + ' ' + ControlerEmployers.SurName.Trim();
+        }
+
+        public string GetDName() {
+            return DispEmployers.FirstName.Trim() + ' ' + DispEmployers.Name.Trim() + ' ' + DispEmployers.SurName.Trim();
+        }
     }
 
     public partial class MonthTables

@@ -12,6 +12,7 @@ namespace mte.Areas.Smena.Controllers
         [Authorize]
         public ActionResult Index()
         {
+            ViewBag.PageTitle = "Смена";
             return View();
         }
     }

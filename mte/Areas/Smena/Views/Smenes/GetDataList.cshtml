@@ -1,0 +1,127 @@
+﻿@using mte.Models
+@using mte.Helpers
+
+@model SmenesView
+
+@{
+    var f_item = Model.DataItems.Count() > 0 ? Model.DataItems.First().Id : 0;
+    var f_1 = (Model.PageInfo.Sort_filter == "date") ? Model.PageInfo.Sort_order : "";
+    var f_2 = (Model.PageInfo.Sort_filter == "cname") ? Model.PageInfo.Sort_order : "";
+    var f_3 = (Model.PageInfo.Sort_filter == "dname") ? Model.PageInfo.Sort_order : "";
+
+    /*
+}
+
+<table class="uk-table uk-table-divider uk-table-hover uk-table-small uk-table-striped uk-table-border uk-margin-remove-bottom">
+    <thead>
+        <tr>
+            <th class="uk-table-shrink uk-text-middle uk-width-small" data-field="date" data-sort="@f_1">
+                @Html.DisplayNameFor(model => model.ModelInfo.SmenaDate)
+                @switch (f_1)
+                {
+                    case "asc":
+                        <span uk-icon="icon: triangle-up; ratio: 1"></span>
+                        break;
+                    case "desc":
+                        <span uk-icon="icon: triangle-down; ratio: 1"></span>
+                        break;
+                }
+            </th>
+            <th class="uk-table-shrink uk-text-middle uk-width-medium" data-field="cname" data-sort="@f_2">
+                @Html.DisplayNameFor(model => model.ModelInfo.ControlerEmployers.Name)
+                @switch (f_2)
+                {
+                    case "asc":
+                        <span uk-icon="icon: triangle-up; ratio: 1"></span>
+                        break;
+                    case "desc":
+                        <span uk-icon="icon: triangle-down; ratio: 1"></span>
+                        break;
+                }
+            </th>
+            <th class="uk-table-expand uk-text-middle" data-field="dname" data-sort="@f_3">
+                @Html.DisplayNameFor(model => model.ModelInfo.DispEmployers.Name)
+                @switch (f_3)
+                {
+                    case "asc":
+                        <span uk-icon="icon: triangle-up; ratio: 1"></span>
+                        break;
+                    case "desc":
+                        <span uk-icon="icon: triangle-down; ratio: 1"></span>
+                        break;
+                }
+            </th>
+        </tr>
+    </thead>
+</table>
+
+<div uk-height-viewport="offset-top: true; offset-bottom: 70px;" class="uk-height-medium">
+    <div class="js-wrapper">
+        <div uk-overflow-auto="selContainer: .uk-height-medium; selContent: .js-wrapper">
+            @if (Model.PageInfo.TotalItems > 0)
+            {
+                <table class="uk-table uk-table-divider uk-table-hover uk-table-small uk-table-striped uk-table-border">
+                    <tbody>
+                        @foreach (var item in Model.DataItems)
+                        {
+                            var is_active = (item.Id == f_item) ? "uk-active" : "";
+
+                            <tr data-id="@item.Id" class="@is_active">
+                                <td class="uk-width-small">
+                                    @Html.DisplayFor(modelItem => item.SmenaDate)
+                                </td>
+                                <td class="uk-width-medium">
+                                    @item.GetCName()
+                                </td>
+                                <td>
+                                    @item.GetDName()
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+                @Html.PageLinks(Model.PageInfo, x => Url.Action("Index", new { page = x, search = Model.PageInfo.Search, sort_order = Model.PageInfo.Sort_order, sort_filter = Model.PageInfo.Sort_filter }))
+            }
+            else
+            {
+                @Html._ErrorNoData()
+            }
+        </div>
+    </div>
+</div>
+
+@{ */ }
+
+
+<div class="uk-child-width-1-7 uk-grid-match" uk-grid>
+
+    @{
+        DateTime dd = DateTime.Now;
+        DateTime dt1 = new DateTime(dd.Year, dd.Month, 1);
+        var dts = Enumerable.Range(0, 31).Select(hv => dt1.AddDays(hv));
+
+        foreach (var item in dts)
+        {
+            var curDay = "";
+            if (dd.Date == item.Date) { curDay = "uk-card-primary"; }
+            <div>
+                <div class="uk-card uk-card-hover uk-card-body @curDay">
+                    <h3 class="uk-card-title">
+                        @item.ToString("dd")
+                    </h3>
+
+                    @{
+                        var data = Model.DataItems.Where(w => w.SmenaDate == item).ToList();
+                        if (data.Count > 0)
+                        {
+                            <div>@data.First().GetDName()</div>
+                            <div>@data.First().GetCName()</div>
+                        }
+                    }
+                </div>
+            </div>
+        }
+    }
+
+</div>

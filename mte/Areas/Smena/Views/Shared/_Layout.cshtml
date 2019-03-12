@@ -10,6 +10,7 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryajax")
     @Scripts.Render("~/bundles/uikit")
 </head>
 
@@ -38,6 +39,7 @@
             </div>
             <div class="uk-card-default">
                 <div class="uk-card uk-card-body uk-card-small">
+                    <h3 class="uk-heading-bullet uk-margin-medium-bottom">@ViewBag.PageTitle</h3>
                     @RenderBody()
                 </div>
             </div>

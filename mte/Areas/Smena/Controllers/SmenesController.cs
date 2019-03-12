@@ -1,25 +1,116 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using mte.Models;
+using Microsoft.AspNet.Identity;
 
 namespace mte.Areas.Smena.Controllers
 {
     public class SmenesController : Controller
     {
         private MteDataContexts db = new MteDataContexts();
+        private ApplicationDbContext dbu = new ApplicationDbContext();
+        private BaseSettings bs = new BaseSettings();
+
+        public int GetUserIdentity()
+        {
+            var uid = User.Identity.GetUserId();
+            ApplicationUser u = dbu.Users.FirstOrDefault(x => x.Id == uid);
+            return u.AdditionalUserInfo.GlobalContainersId;
+        }
 
         // GET: Smena/Smenes
         public async Task<ActionResult> Index()
         {
-            var smenes = db.Smenes.Include(s => s.ControlerEmployers).Include(s => s.DispEmployers);
-            return View(await smenes.ToListAsync());
+            ViewBag.PageTitle = "Смена / Текущие";
+            return View();
+        }
+
+        public async Task<ActionResult> GetDataList(int page = 1, string search = null, string sort_filter = null, string sort_order = null)
+        {
+            var list_count = 0;
+            var list = from b in db.Smenes select b;
+            int cguid = GetUserIdentity();
+
+            sort_filter = string.IsNullOrEmpty(sort_filter) ? "date" : sort_filter;
+            sort_order = string.IsNullOrEmpty(sort_order) ? "asc" : sort_order;
+
+            if (!string.IsNullOrEmpty(search))
+            {
+                list = list.Where(
+                    w => w.ControlerEmployers.Name.ToUpper().Contains(search.ToUpper()) ||
+                    w.DispEmployers.Name.ToUpper().Contains(search.ToUpper())
+                );
+            }
+
+            switch (sort_filter.ToLower())
+            {
+                case "date":
+                    switch (sort_order.ToLower())
+                    {
+                        case "asc":
+                            list = list.OrderBy(o => o.SmenaDate);
+                            break;
+
+                        case "desc":
+                            list = list.OrderByDescending(o => o.SmenaDate);
+                            break;
+                    }
+                    break;
+
+                case "cname":
+                    switch (sort_order.ToLower())
+                    {
+                        case "asc":
+                            list = list.OrderBy(o => o.ControlerEmployers.Name);
+                            break;
+
+                        case "desc":
+                            list = list.OrderByDescending(o => o.ControlerEmployers.Name);
+                            break;
+                    }
+                    break;
+
+                case "dname":
+                    switch (sort_order.ToLower())
+                    {
+                        case "asc":
+                            list = list.OrderBy(o => o.DispEmployers.Name);
+                            break;
+
+                        case "desc":
+                            list = list.OrderByDescending(o => o.DispEmployers.Name);
+                            break;
+                    }
+                    break;
+            }
+
+            list_count = await list.CountAsync();
+            list = list.Skip((page - 1) * bs.bs_itemsPerPage).Take(bs.bs_itemsPerPage);
+
+            SmenesView model = new SmenesView
+            {
+                DataItems = await list.ToListAsync(),
+                PageInfo = new PagingInfo
+                {
+                    CurrentPage = page,
+                    ItemsPerPage = bs.bs_itemsPerPage,
+                    Search = search,
+                    Sort_order = sort_order,
+                    Sort_filter = sort_filter,
+                    TotalItems = list_count
+                }
+            };
+
+            var smenes = db.Smenes
+                .Include(s => s.ControlerEmployers)
+                .Include(s => s.DispEmployers)
+                .Where(w => w.GlobalContainersId == cguid);
+
+            return PartialView(model);
         }
 
         // GET: Smena/Smenes/Details/5
