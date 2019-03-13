@@ -15,31 +15,44 @@
     new { @id = "frm_index" }))
 {
     <nav class="uk-margin uk-navbar-container-default" uk-navbar>
+
         <div class="uk-navbar-left">
-            <select class="uk-select">
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
-                <option>6</option>
-            </select>
-            <select class="uk-select">
-                <option>Январь</option>
-                <option>Февраль</option>
-                <option>Март</option>
-                <option>Апрель</option>
-                <option>Май</option>
-                <option>Июнь</option>
-            </select>
-            <select class="uk-select">
-                <option>2014</option>
-                <option>2015</option>
-                <option>2016</option>
-                <option>2017</option>
-                <option>2018</option>
-                <option>2019</option>
-            </select>
+
+            <div class="uk-button-group">
+                @{
+                    var mdt = DateTime.DaysInMonth(DateTime.Now.Date.Year, DateTime.Now.Date.Month);
+                }
+
+                <select class="uk-select uk-width-auto" name="fday">
+                    @for (int i = 1; i <= mdt; i++)
+                    {
+                        <option>
+                            @i
+                        </option>
+                    }
+                </select>
+
+                <select class="uk-select uk-width-auto" name="fmonth">
+                    @for (int i = 1; i <= 12; i++)
+                    {
+                        var dd = new DateTime(1, i, 1);
+
+                        <option>
+                            @dd.ToString("MMMM")
+                        </option>
+                    }
+                </select>
+
+                <select class="uk-select uk-width-auto" name="fyear">
+                    @for (int i = DateTime.Now.Date.Year - 3; i <= DateTime.Now.Date.Year; i++)
+                    {
+                        <option>
+                            @i
+                        </option>
+                    }
+                </select>
+            </div>
+
         </div>
 
         <div class="uk-navbar-right">
@@ -81,6 +94,10 @@
 
     $(document).ready(function () {
         $('#frm_index').submit()
+
+        $('select').change(function () {
+            $('#frm_index').submit()
+        });
     });
 
 </script>

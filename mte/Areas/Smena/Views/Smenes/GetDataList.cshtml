@@ -3,13 +3,13 @@
 
 @model SmenesView
 
-@{
+@{ /*
+    
     var f_item = Model.DataItems.Count() > 0 ? Model.DataItems.First().Id : 0;
     var f_1 = (Model.PageInfo.Sort_filter == "date") ? Model.PageInfo.Sort_order : "";
     var f_2 = (Model.PageInfo.Sort_filter == "cname") ? Model.PageInfo.Sort_order : "";
     var f_3 = (Model.PageInfo.Sort_filter == "dname") ? Model.PageInfo.Sort_order : "";
 
-    /*
 }
 
 <table class="uk-table uk-table-divider uk-table-hover uk-table-small uk-table-striped uk-table-border uk-margin-remove-bottom">

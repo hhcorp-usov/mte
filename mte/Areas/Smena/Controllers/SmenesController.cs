@@ -29,11 +29,16 @@ namespace mte.Areas.Smena.Controllers
             return View();
         }
 
-        public async Task<ActionResult> GetDataList(int page = 1, string search = null, string sort_filter = null, string sort_order = null)
+        public async Task<ActionResult> GetDataList(int page = 1, string search = null, string sort_filter = null, string sort_order = null, int fday = null, int fmonth = null, int fyear = null)
         {
             var list_count = 0;
             var list = from b in db.Smenes select b;
             int cguid = GetUserIdentity();
+
+            list = list
+                .Include(s => s.ControlerEmployers)
+                .Include(s => s.DispEmployers)
+                .Where(w => w.GlobalContainersId == cguid);
 
             sort_filter = string.IsNullOrEmpty(sort_filter) ? "date" : sort_filter;
             sort_order = string.IsNullOrEmpty(sort_order) ? "asc" : sort_order;
@@ -104,11 +109,6 @@ namespace mte.Areas.Smena.Controllers
                     TotalItems = list_count
                 }
             };
-
-            var smenes = db.Smenes
-                .Include(s => s.ControlerEmployers)
-                .Include(s => s.DispEmployers)
-                .Where(w => w.GlobalContainersId == cguid);
 
             return PartialView(model);
         }

@@ -1,1 +1,16 @@
-﻿
+﻿@using mte.Models
+
+@model Smenes
+
+<dl class="uk-description-list uk-description-list-divider">
+
+    <dt>Данные на дату:</dt>
+    <dd>@Model.SmenaDate.ToString("dd/MM/yyyy")</dd>
+
+    <dt>Диспетчер:</dt>
+    <dd>@Model.GetDName()</dd>
+
+    <dt>Контролер:</dt>
+    <dd>@Model.GetCName()</dd>
+
+</dl>
