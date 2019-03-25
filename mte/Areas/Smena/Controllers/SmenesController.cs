@@ -23,13 +23,13 @@ namespace mte.Areas.Smena.Controllers
         }
 
         // GET: Smena/Smenes
-        public async Task<ActionResult> Index()
+        public ActionResult Index()
         {
             ViewBag.PageTitle = "Смена / Текущие";
             return View();
         }
 
-        public async Task<ActionResult> GetDataList(int page = 1, string search = null, string sort_filter = null, string sort_order = null, int fday = null, int fmonth = null, int fyear = null)
+        public async Task<ActionResult> GetDataList(int page = 1, string search = null, string sort_filter = null, string sort_order = null, int fday = 0, int fmonth = 0, int fyear = 0)
         {
             var list_count = 0;
             var list = from b in db.Smenes select b;
